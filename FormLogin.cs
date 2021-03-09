@@ -20,6 +20,7 @@ namespace QLCF
         public FormLogin()
         {
             InitializeComponent();
+            //comment tạm để làm mẫu
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
