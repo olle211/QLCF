@@ -15,8 +15,7 @@ namespace QLCF
     public partial class FormLogin : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
-        Boolean isAdmin;
-        string name;
+        
         public FormLogin()
         {
             InitializeComponent();
@@ -41,19 +40,20 @@ namespace QLCF
                 if (dataReader.HasRows)
                 {
                     while (dataReader.Read())
-                    { 
-                        name = dataReader.GetString(1);
-                        isAdmin = dataReader.GetBoolean(dataReader.GetOrdinal("isAdmin"));
-                        if(isAdmin == true)
+                    {
+                        Program.MaNVLogin = dataReader["iMaNV"].ToString();
+                        Program.TenNVLogin = dataReader["sHoTen"].ToString();
+                        Program.isAdmin = dataReader.GetBoolean(dataReader.GetOrdinal("isAdmin"));
+                        if(Program.isAdmin == true)
                         {
-                            FormAdmin FormAdmin = new FormAdmin(name);
+                            FormAdmin FormAdmin = new FormAdmin();
                             Hide();
                             FormAdmin.ShowDialog();
                             Show();
                         }
                         else
                         {
-                            FormEmployee FormEmployee = new FormEmployee(name);
+                            FormEmployee FormEmployee = new FormEmployee();
                             Hide();
                             FormEmployee.ShowDialog();
                             Show();

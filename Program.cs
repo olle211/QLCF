@@ -8,14 +8,21 @@ namespace QLCF
 {
     static class Program
     {
+
+        public static String MaNVLogin;
+        public static String TenNVLogin;
+        public static Boolean isAdmin;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+        
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
+
             Application.Run(new FormLogin());
         }
     }

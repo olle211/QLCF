@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace QLCF
 {
@@ -17,7 +18,7 @@ namespace QLCF
         String username;
 
 
-        public FormAdmin(string _username)
+        public FormAdmin(string _username=null)
         {
             InitializeComponent();
             username = _username;
@@ -26,18 +27,36 @@ namespace QLCF
         private void FormAdmin_Load(object sender, EventArgs e)
         {
             lblWelcome.Text = "Xin chào " + username;
-        }
 
-        private void btnNhanVien_Click(object sender, EventArgs e)
+            var connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand("returnNV", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            connection.Open();
+            SqlDataAdapter dataAdapterNV = new SqlDataAdapter(command);
+            DataTable dataTableNV = new DataTable();
+            dataAdapterNV.Fill(dataTableNV);
+            connection.Close();
+            dataGridViewNV.DataSource = dataTableNV;
+        }
+        public void ReloadForm()
         {
-
+            var connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand("returnNV", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter dataAdapterNV = new SqlDataAdapter(command);
+            DataTable dataTableNV = new DataTable();
+            dataAdapterNV.Fill(dataTableNV);
+            dataGridViewNV.DataSource = dataTableNV;
         }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             FormAddEmployee FormAddEmployee = new FormAddEmployee();
             FormAddEmployee.ShowDialog();
             Show();
+            ReloadForm();
         }
 
         private void txtSearch_Enter(object sender, EventArgs e)
@@ -64,7 +83,7 @@ namespace QLCF
                 DialogResult dr = MessageBox.Show("Bạn có muốn đóng Danh mục Nhân viên?", "Xác nhận đóng", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
-                    Hide();
+                    Close();
                 }
             }
         }

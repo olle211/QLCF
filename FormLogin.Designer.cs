@@ -64,6 +64,7 @@ namespace QLCF
             // 
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUsername.Location = new System.Drawing.Point(89, 13);
+            this.txtUsername.MaxLength = 10;
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(215, 20);
             this.txtUsername.TabIndex = 3;
