@@ -82,10 +82,10 @@ INSERT INTO tblNhanvien(sHoten, sGioitinh, sSDT, sDiachi, dNgaysinh, iMaCV, sTra
 VALUES ( 'phuong', 'nam', '0912345677', 'dinh cong', '02-11-1998', 2, 'dang lam',0, 'admin100');
 
 /*tạo proc thêm nhân viên */
-create proc addNV
+alter proc addNV
 @sHoten varchar (50),
 @sGioitinh nvarchar (10),
-@sdt varchar(10),
+@sSDT varchar(10),
 @sDiachi varchar(50),
 @dNgaysinh date,
 @status nvarchar (20),
@@ -94,7 +94,27 @@ create proc addNV
 as
 	BEGIN
 		insert into tblNhanvien
-		values (@sHoten,@sGioitinh,@sdt,@sDiachi,@dNgaysinh, @status, @isAdmin, @password);
+		values (@sHoten,@sGioitinh,@sSDT,@sDiachi,@dNgaysinh, @status, @isAdmin, @password);
 	END
 
 	drop proc addNV
+	
+/*check nhân viên tồn tại*/
+create proc checkEmployeeExist
+@sSDT varchar(10)
+as
+select sSDT
+from tblNhanvien 
+where sSDT = @sSDT
+
+exec checkEmployeeExist '0912345670'
+
+
+/*tạo proc trả dữ liệu của bảng nhân viên */
+alter proc returnNV
+as 
+select iMaNV, sHoten, sGioitinh,sSDT, sDiachi, dNgaysinh, sTrangthai, isAdmin
+from tblNhanvien
+
+exec returnNV
+

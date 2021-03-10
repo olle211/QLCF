@@ -29,6 +29,7 @@ namespace QLCF
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddEmployee));
             this.gbGender = new System.Windows.Forms.GroupBox();
             this.rbNam = new System.Windows.Forms.RadioButton();
@@ -44,16 +45,30 @@ namespace QLCF
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbIsAdmin = new System.Windows.Forms.GroupBox();
             this.rbNotAdmin = new System.Windows.Forms.RadioButton();
             this.rbAdmin = new System.Windows.Forms.RadioButton();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.errorHoten = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorAddress = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorSDT = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorGender = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorStatus = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorIsAdmin = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorDoB = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbGender.SuspendLayout();
             this.gbStatus.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbIsAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorHoten)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorSDT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorGender)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorIsAdmin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorDoB)).BeginInit();
             this.SuspendLayout();
             // 
             // gbGender
@@ -66,6 +81,7 @@ namespace QLCF
             this.gbGender.TabIndex = 46;
             this.gbGender.TabStop = false;
             this.gbGender.Text = "Giới tính:";
+            this.gbGender.Validating += new System.ComponentModel.CancelEventHandler(this.gbGender_Validating);
             // 
             // rbNam
             // 
@@ -94,9 +110,11 @@ namespace QLCF
             // txtSDT
             // 
             this.txtSDT.Location = new System.Drawing.Point(353, 14);
+            this.txtSDT.MaxLength = 10;
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(158, 20);
             this.txtSDT.TabIndex = 45;
+            this.txtSDT.Validating += new System.ComponentModel.CancelEventHandler(this.txtSDT_Validating);
             // 
             // txtAddress
             // 
@@ -104,6 +122,7 @@ namespace QLCF
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(149, 20);
             this.txtAddress.TabIndex = 41;
+            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.txtAddress_Validating);
             // 
             // txtHoten
             // 
@@ -111,6 +130,7 @@ namespace QLCF
             this.txtHoten.Name = "txtHoten";
             this.txtHoten.Size = new System.Drawing.Size(150, 20);
             this.txtHoten.TabIndex = 39;
+            this.txtHoten.Validating += new System.ComponentModel.CancelEventHandler(this.txtHoten_Validating);
             // 
             // gbStatus
             // 
@@ -122,6 +142,7 @@ namespace QLCF
             this.gbStatus.TabIndex = 47;
             this.gbStatus.TabStop = false;
             this.gbStatus.Text = "Trạng thái:";
+            this.gbStatus.Validating += new System.ComponentModel.CancelEventHandler(this.gbStatus_Validating);
             // 
             // rbNotWorking
             // 
@@ -155,6 +176,7 @@ namespace QLCF
             this.dtPickerDoB.Name = "dtPickerDoB";
             this.dtPickerDoB.Size = new System.Drawing.Size(158, 20);
             this.dtPickerDoB.TabIndex = 44;
+            this.dtPickerDoB.Validating += new System.ComponentModel.CancelEventHandler(this.dtPickerDoB_Validating);
             // 
             // label4
             // 
@@ -192,16 +214,17 @@ namespace QLCF
             this.label6.TabIndex = 43;
             this.label6.Text = "Số điện thoại: ";
             // 
-            // groupBox1
+            // gbIsAdmin
             // 
-            this.groupBox1.Controls.Add(this.rbNotAdmin);
-            this.groupBox1.Controls.Add(this.rbAdmin);
-            this.groupBox1.Location = new System.Drawing.Point(265, 125);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(246, 26);
-            this.groupBox1.TabIndex = 48;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Quyền quản trị:";
+            this.gbIsAdmin.Controls.Add(this.rbNotAdmin);
+            this.gbIsAdmin.Controls.Add(this.rbAdmin);
+            this.gbIsAdmin.Location = new System.Drawing.Point(265, 125);
+            this.gbIsAdmin.Name = "gbIsAdmin";
+            this.gbIsAdmin.Size = new System.Drawing.Size(246, 26);
+            this.gbIsAdmin.TabIndex = 48;
+            this.gbIsAdmin.TabStop = false;
+            this.gbIsAdmin.Text = "Quyền quản trị:";
+            this.gbIsAdmin.Validating += new System.ComponentModel.CancelEventHandler(this.gbIsAdmin_Validating);
             // 
             // rbNotAdmin
             // 
@@ -229,6 +252,7 @@ namespace QLCF
             // 
             // txtPassword
             // 
+            this.txtPassword.Enabled = false;
             this.txtPassword.Location = new System.Drawing.Point(83, 126);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -270,16 +294,44 @@ namespace QLCF
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // errorHoten
+            // 
+            this.errorHoten.ContainerControl = this;
+            // 
+            // errorAddress
+            // 
+            this.errorAddress.ContainerControl = this;
+            // 
+            // errorSDT
+            // 
+            this.errorSDT.ContainerControl = this;
+            // 
+            // errorGender
+            // 
+            this.errorGender.ContainerControl = this;
+            // 
+            // errorStatus
+            // 
+            this.errorStatus.ContainerControl = this;
+            // 
+            // errorIsAdmin
+            // 
+            this.errorIsAdmin.ContainerControl = this;
+            // 
+            // errorDoB
+            // 
+            this.errorDoB.ContainerControl = this;
+            // 
             // FormAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 216);
+            this.ClientSize = new System.Drawing.Size(536, 216);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbIsAdmin);
             this.Controls.Add(this.gbGender);
             this.Controls.Add(this.txtSDT);
             this.Controls.Add(this.txtAddress);
@@ -297,8 +349,15 @@ namespace QLCF
             this.gbGender.PerformLayout();
             this.gbStatus.ResumeLayout(false);
             this.gbStatus.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbIsAdmin.ResumeLayout(false);
+            this.gbIsAdmin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorHoten)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorSDT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorGender)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorIsAdmin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorDoB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,12 +379,19 @@ namespace QLCF
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbIsAdmin;
         private System.Windows.Forms.RadioButton rbNotAdmin;
         private System.Windows.Forms.RadioButton rbAdmin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ErrorProvider errorHoten;
+        private System.Windows.Forms.ErrorProvider errorAddress;
+        private System.Windows.Forms.ErrorProvider errorSDT;
+        private System.Windows.Forms.ErrorProvider errorGender;
+        private System.Windows.Forms.ErrorProvider errorStatus;
+        private System.Windows.Forms.ErrorProvider errorIsAdmin;
+        private System.Windows.Forms.ErrorProvider errorDoB;
     }
 }
