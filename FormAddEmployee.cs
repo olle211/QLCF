@@ -24,7 +24,10 @@ namespace QLCF
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                checkEmployeeExist();
+                if (!checkEmployeeExist())
+                {
+                    saveData();
+                }
             }
         }
 
@@ -49,74 +52,28 @@ namespace QLCF
         }
 
 
-        public FormAddEmployee()
+        public FormAddEmployee(string type, List<string> dataArray)
         {
             InitializeComponent();
+            string typeForm = type;
+            if(typeForm == "new")
+            {
+                this.Text = "Thêm mới nhân viên";
+            }
+            else if (typeForm == "edit")
+            {
+                this.Text = "Sửa nhân viên";
+            }
+            List<string> data = dataArray;
+            /*foreach(string i in data)
+            {
+                txtHoten.Text = data[i].name;
+            }*/
         }
 
         private void FormAddEmployee_Load(object sender, EventArgs e)
         {
             txtPassword.Text = "123456";
-        }
-
-        public void checkNV()
-        {
-            hoten = txtHoten.Text.Trim();
-            diachi = txtAddress.Text.Trim();
-            sodienthoai = txtSDT.Text.Trim();
-            password = txtPassword.Text.Trim();
-            DoB = dtPickerDoB.Value;
-
-            var today = DateTime.Today;
-            decimal age = today.Year - DoB.Year;
-
-            if (hoten == "")
-            {
-                MessageBox.Show("Vui lòng nhập họ tên.");
-                txtHoten.Focus();
-            }
-            if (sodienthoai == "")
-            {
-                MessageBox.Show("Vui lòng nhập số điện thoại.");
-                txtSDT.Focus();
-            }
-            else if (sodienthoai.Length < 10 || sodienthoai.Length > 10)
-            {
-                MessageBox.Show("Số điện thoại phải đủ 10 chữ số.");
-                txtSDT.Focus();
-            }
-            else if (sodienthoai.Length == 10)
-            {
-                /*Regex phoneNumpattern = new Regex(@"^(\+[0-9]{9})$");
-                if (phoneNumpattern.IsMatch(sodienthoai) == false)
-                {
-                    MessageBox.Show("Sai định dạng số điện thoại, vui lòng nhập lại.");
-                    txtSDT.Focus();
-                }
-                else
-                {*/
-                checkEmployeeExist();
-            }
-            if (diachi == "")
-            {
-                MessageBox.Show("Vui lòng nhập địa chỉ.");
-                txtAddress.Focus();
-            }
-            else if (age < 18)
-            {
-                MessageBox.Show("Số tuổi phải lớn hơn 18.");
-                dtPickerDoB.Focus();
-            }
-
-            else if (gioitinh == null)
-            {
-                MessageBox.Show("Vui lòng chọn giới tính.");
-            }
-
-            else if (status == null)
-            {
-                MessageBox.Show("Vui lòng chọn trạng thái làm việc.");
-            }
         }
 
         public void saveData()
@@ -150,7 +107,7 @@ namespace QLCF
             Close();
         }
 
-        public void checkEmployeeExist()
+        public bool checkEmployeeExist()
         {
             var connection = new SqlConnection(connectionString);
             var command = new SqlCommand("checkEmployeeExist", connection);
@@ -164,20 +121,22 @@ namespace QLCF
             var dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             if (dataReader.HasRows)
             {
-                if (dataReader.Read())
+                /*if (dataReader.Read())
                 {
                     string SDT = dataReader.GetString(0);
                     if (sodienthoai == SDT)
                     {
                         MessageBox.Show("Đã tồn tại nhân viên có số điện thoại " + SDT + "!");
-                        connection.Close();
                     }
-                }
+                }*/
+                MessageBox.Show("Số điện thoại đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSDT.Focus();
+                return true;
             }
             else
             {
-                saveData();
                 connection.Close();
+                return false;
             }
         }
         private void rbAdmin_CheckedChanged(object sender, EventArgs e)

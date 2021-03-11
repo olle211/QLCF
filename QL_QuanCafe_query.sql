@@ -68,11 +68,11 @@ alter proc LoginCheck
 @username varchar(10),
 @password varchar(10)
 as
-select *
+select sHoten, sSDT, isAdmin, sMatkhau
 from tblNhanvien 
 where sSDT = @username and sMatkhau = @password
 
-exec LoginCheck '0912345677', admin100
+exec LoginCheck '0987654321', 123456
 
 ALTER TABLE tblNhanvien
   DROP COLUMN iMaCV ;
@@ -117,4 +117,13 @@ select iMaNV, sHoten, sGioitinh,sSDT, sDiachi, dNgaysinh, sTrangthai, isAdmin
 from tblNhanvien
 
 exec returnNV
+
+/*tạo proc đổi mật khẩu */
+create proc ChangePW 
+@username varchar(10),
+@newPW varchar (10)
+as
+update tblNhanvien
+set sMatkhau = @newPW 
+where @username = sSDT
 

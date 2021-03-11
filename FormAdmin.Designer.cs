@@ -39,9 +39,6 @@ namespace QLCF
             this.btnReport = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.dataGridViewNV = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.iMaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sHoten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sGioitinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +47,9 @@ namespace QLCF
             this.dNgaysinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sTrangthai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isAdmin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNV)).BeginInit();
@@ -173,35 +173,7 @@ namespace QLCF
             this.dataGridViewNV.ReadOnly = true;
             this.dataGridViewNV.Size = new System.Drawing.Size(844, 330);
             this.dataGridViewNV.TabIndex = 8;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(821, 452);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Danh mục đồ uống";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(821, 452);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Bàn";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(821, 452);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Thống kê doanh thu";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.dataGridViewNV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewNV_CellClick);
             // 
             // iMaNV
             // 
@@ -261,6 +233,35 @@ namespace QLCF
             this.isAdmin.Name = "isAdmin";
             this.isAdmin.ReadOnly = true;
             this.isAdmin.Width = 120;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(840, 452);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Danh mục đồ uống";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(840, 452);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Bàn";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(840, 452);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Thống kê doanh thu";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // FormAdmin
             // 

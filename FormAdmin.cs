@@ -15,8 +15,8 @@ namespace QLCF
     public partial class FormAdmin : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
-        String username;
-
+        String username, type;
+        List<string> dataArray;
 
         public FormAdmin(string _username)
         {
@@ -53,7 +53,8 @@ namespace QLCF
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormAddEmployee FormAddEmployee = new FormAddEmployee();
+            type = "new";
+            FormAddEmployee FormAddEmployee = new FormAddEmployee(type, dataArray);
             FormAddEmployee.ShowDialog();
             Show();
             ReloadForm();
@@ -85,6 +86,36 @@ namespace QLCF
                 {
                     Close();
                 }
+            }
+        }
+        private void dataGridViewNV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataGridViewNV.CurrentRow.Selected = true;
+                //string type = "edit";
+                dataArray = new List<string>(dataGridViewNV.SelectedRows.Count);
+
+                for (int index = 0; index < dataGridViewNV.SelectedRows.Count; index++)
+                {
+                    var selectedRow = dataGridViewNV.SelectedRows[index];
+                    var item = (string)selectedRow.DataBoundItem;
+
+                    dataArray.Add(item);
+                }
+
+               /* data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sGioitinh"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sTrangthai"].FormattedValue.ToString());
+                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["isAdmin"].FormattedValue.ToString());*/
+
+                FormAddEmployee FormAddEmployee = new FormAddEmployee(type, dataArray);
+                FormAddEmployee.ShowDialog();
+                Show();
             }
         }
     }

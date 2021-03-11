@@ -343,7 +343,6 @@ namespace QLCF
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label6);
             this.Name = "FormAddEmployee";
-            this.Text = "Thêm mới nhân viên";
             this.Load += new System.EventHandler(this.FormAddEmployee_Load);
             this.gbGender.ResumeLayout(false);
             this.gbGender.PerformLayout();
