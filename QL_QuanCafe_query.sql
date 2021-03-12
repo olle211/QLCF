@@ -127,3 +127,59 @@ update tblNhanvien
 set sMatkhau = @newPW 
 where @username = sSDT
 
+/*check loại đồ uống tồn tại*/
+create proc checkCategoryExist
+@categoryNm varchar(20)
+as
+select sTenloaidouong
+from tblLoaidouong
+where sTenloaidouong = @categoryNm
+
+exec checkCategoryExist '0912345670'
+
+/* thêm mới loại đồ uống */
+create proc addCategory
+@sTenloaidouong varchar (20)
+as
+	BEGIN
+		insert into tblLoaidouong
+		values (@sTenloaidouong);
+	END
+
+	/*tạo proc trả dữ liệu của bảng loại đồ uống */
+create proc returnCategory
+as 
+select *
+from tblLoaidouong
+
+exec returnCategory
+
+/* thêm mới  đồ uống */
+create proc addBeverage
+@sTendouong varchar (20),
+@fDongia float,
+@iSoluong int,
+@iMaloaidouong int
+as
+	BEGIN
+		insert into tblDouong
+		values (@sTendouong,@fDongia,@iSoluong, @iMaloaidouong);
+	END
+exec addBeverage N'Phin đen đá', 35000, 30, 1
+sp_help tblLoaidouong
+
+		/*tạo proc trả dữ liệu của bảng đồ uống */
+alter proc returnBeverage
+as 
+select tblDouong.iMadouong, tblDouong.sTendouong, tblDouong.iSoluong, tblDouong.fDongia, tblDouong.iMaloaidouong, tblLoaidouong.sTenloaidouong
+from tblDouong, tblLoaidouong
+where tblDouong.iMaloaidouong = tblLoaidouong.iMaloaidouong
+exec returnBeverage
+
+/*check loại đồ uống tồn tại*/
+create proc checkBeverageExist
+@beverageNm varchar(20)
+as
+select sTendouong
+from tblDouong
+where sTendouong = @beverageNm

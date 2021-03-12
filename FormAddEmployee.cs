@@ -33,7 +33,7 @@ namespace QLCF
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Bạn có muốn hủy?", "Hủy", MessageBoxButtons.YesNo);
+            DialogResult dr = MessageBox.Show("Bạn có muốn hủy?", "Hủy", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
                 txtHoten.Text = "";
