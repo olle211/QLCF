@@ -118,6 +118,28 @@ from tblNhanvien
 
 exec returnNV
 
+/*proc sửa nhân viên*/
+alter proc editNV 
+@iMaNV int,
+@sHoten varchar (50),
+@sGioitinh nvarchar (10),
+@sDiachi varchar(50),
+@dNgaysinh date,
+@status nvarchar (20),
+@isAdmin bit
+as 
+update tblNhanvien
+set sHoten = @sHoten, sGioitinh = @sGioitinh, sDiachi = @sDiachi, dNgaysinh = @dNgaysinh, sTrangthai = @status, isAdmin = @isAdmin
+WHERE iMaNV = @iMaNV
+
+/*proc xóa nhân viên*/
+create proc deleteNV 
+@iMaNV int
+as 
+DELETE
+from tblNhanvien
+WHERE iMaNV = @iMaNV 
+
 /*tạo proc đổi mật khẩu */
 create proc ChangePW 
 @username varchar(10),
@@ -146,7 +168,24 @@ as
 		values (@sTenloaidouong);
 	END
 
-	/*tạo proc trả dữ liệu của bảng loại đồ uống */
+/*proc sửa loại đồ uống*/
+create proc editCategory 
+@iMaloaidouong int,
+@sTenloaidouong varchar (20)
+as 
+update tblLoaidouong
+set sTenloaidouong = @sTenloaidouong
+WHERE iMaloaidouong = @iMaloaidouong
+
+/*proc xóa loại đồ uống*/
+create proc deleteCategory 
+@iMaloaidouong int
+as 
+DELETE
+from tblLoaidouong
+WHERE iMaloaidouong = @iMaloaidouong 
+
+/*tạo proc trả dữ liệu của bảng loại đồ uống */
 create proc returnCategory
 as 
 select *
@@ -155,23 +194,43 @@ from tblLoaidouong
 exec returnCategory
 
 /* thêm mới  đồ uống */
-create proc addBeverage
-@sTendouong varchar (20),
+alter proc addBeverage
+@sTendouong nvarchar (20),
 @fDongia float,
 @iSoluong int,
 @iMaloaidouong int
 as
 	BEGIN
 		insert into tblDouong
-		values (@sTendouong,@fDongia,@iSoluong, @iMaloaidouong);
+		values (@sTendouong,@iMaloaidouong,@iSoluong, @fDongia);
 	END
-exec addBeverage N'Phin đen đá', 35000, 30, 1
-sp_help tblLoaidouong
 
-		/*tạo proc trả dữ liệu của bảng đồ uống */
+exec addBeverage N'Phin đen đá', 1, 30, 35000
+
+/*proc sửa đồ uống*/
+create proc editBeverage 
+@iMadouong int,
+@sTendouong nvarchar (20),
+@fDongia float,
+@iSoluong int,
+@iMaloaidouong int
+as 
+update tblDouong
+set sTendouong = @sTendouong, fDongia = @fDongia,iSoluong = @iSoluong, iMaloaidouong = @iMaloaidouong
+WHERE iMadouong = @iMadouong
+
+/*proc xóa đồ uống*/
+create proc deleteBeverage
+@iMadouong int
+as 
+DELETE
+from tblDouong
+WHERE iMadouong = @iMadouong
+
+/*tạo proc trả dữ liệu của bảng đồ uống */
 alter proc returnBeverage
 as 
-select tblDouong.iMadouong, tblDouong.sTendouong, tblDouong.iSoluong, tblDouong.fDongia, tblDouong.iMaloaidouong, tblLoaidouong.sTenloaidouong
+select tblDouong.iMadouong, tblDouong.sTendouong, tblDouong.iSoluong, tblDouong.fDongia, tblLoaidouong.sTenloaidouong
 from tblDouong, tblLoaidouong
 where tblDouong.iMaloaidouong = tblLoaidouong.iMaloaidouong
 exec returnBeverage

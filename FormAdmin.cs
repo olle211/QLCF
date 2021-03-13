@@ -16,7 +16,10 @@ namespace QLCF
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
         String username, type;
-        List<string> dataArray;
+        string empName, empPhone, empAddress, cateName;
+        DateTime empDoB;
+        Boolean empIsAdmin, empGender, empStatus;
+        int empId, cateId;
 
         public FormAdmin(string _username)
         {
@@ -57,11 +60,10 @@ namespace QLCF
             dataGridViewBeverage.DataSource = dtBeverage;
         }
 
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             type = "new";
-            FormAddEmployee FormAddEmployee = new FormAddEmployee(type, dataArray);
+            FormAddEmployee FormAddEmployee = new FormAddEmployee(type, empId, empName, empPhone, empAddress, empStatus, empGender, empDoB, empIsAdmin);
             FormAddEmployee.ShowDialog();
             Show();
             ReloadForm();
@@ -76,6 +78,57 @@ namespace QLCF
             }
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            type = "delete";
+            if (empStatus == false)
+            {
+                deleteData();
+            }
+            else
+            {
+                MessageBox.Show("Không thể xóa nhân viên có trạng thái Đang làm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnEditCategory_Click(object sender, EventArgs e)
+        {
+            type = "edit";
+            FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
+            FormAddCategory.ShowDialog();
+            Show();
+            ReloadForm();
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+                MessageBox.Show("Không thể xóa được", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            type = "edit";
+            FormAddEmployee FormAddEmployee = new FormAddEmployee(type, empId, empName, empPhone, empAddress, empStatus, empGender, empDoB, empIsAdmin);
+            FormAddEmployee.ShowDialog();
+            Show();
+            ReloadForm();
+        }
+
+        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataGridViewCategory.CurrentRow.Selected = true;
+                btnDelete.Enabled = true;
+                btnEdit.Enabled = true;
+                btnAdd.Enabled = false;
+                btnReport.Enabled = false;
+
+                cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
+                cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
+            }
+        }
+
         private void txtSearch_Leave(object sender, EventArgs e)
         {
             if (txtSearch.Text == "")
@@ -85,21 +138,10 @@ namespace QLCF
             }
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            {
-                DialogResult dr = MessageBox.Show("Bạn có muốn đóng Danh mục Nhân viên?", "Xác nhận đóng", MessageBoxButtons.YesNo);
-                if (dr == DialogResult.Yes)
-                {
-                    Close();
-                }
-            }
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             type = "new";
-            FormAddCategory FormAddCategory = new FormAddCategory(type);
+            FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
             FormAddCategory.ShowDialog();
             Show();
             ReloadForm();
@@ -119,29 +161,64 @@ namespace QLCF
             if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 dataGridViewNV.CurrentRow.Selected = true;
-                //string type = "edit";
-                dataArray = new List<string>(dataGridViewNV.SelectedRows.Count);
+                btnDelete.Enabled = true;
+                btnEdit.Enabled = true;
+                btnAdd.Enabled = false;
+                btnReport.Enabled = false;
 
-                for (int index = 0; index < dataGridViewNV.SelectedRows.Count; index++)
+                empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
+                empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
+                empAddress = (dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
+                empPhone = (dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
+                empDoB = Convert.ToDateTime(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
+                if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nam"))
                 {
-                    var selectedRow = dataGridViewNV.SelectedRows[index];
-                    var item = (string)selectedRow.DataBoundItem;
+                    empGender = true;
 
-                    dataArray.Add(item);
+                }
+                else if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nữ"))
+                {
+                    empGender = false;
                 }
 
-               /* data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sGioitinh"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["sTrangthai"].FormattedValue.ToString());
-                data.Add(dataGridViewNV.Rows[e.RowIndex].Cells["isAdmin"].FormattedValue.ToString());*/
+                if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Đang làm"))
+                {
+                    empStatus = true;
+                }
+                else if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Nghỉ việc"))
+                {
+                    empStatus = false;
+                }
+                if (dataGridViewNV.SelectedRows[0].Cells["isAdmin"].Value.Equals(true))
+                {
+                    empIsAdmin = true;
+                }
+                else
+                {
+                    empIsAdmin = false;
 
-                FormAddEmployee FormAddEmployee = new FormAddEmployee(type, dataArray);
-                FormAddEmployee.ShowDialog();
-                Show();
+                }
+            }
+        }
+
+        public void deleteData()
+        {
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này? Dữ liệu sẽ không thể khôi phục.", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                var connection = new SqlConnection(connectionString);
+                var command = new SqlCommand("deleteNV", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter id = command.Parameters.Add("iMaNV", SqlDbType.Int);
+                id.Value = empId;
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+                MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ReloadForm();
             }
         }
     }

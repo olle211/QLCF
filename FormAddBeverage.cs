@@ -89,7 +89,7 @@ namespace QLCF
             command.CommandType = CommandType.StoredProcedure;
 
             SqlParameter hoTen = command.Parameters.Add("sTendouong", SqlDbType.NVarChar, 20);
-            hoTen.Value = txtHoten.Text.Trim();
+            hoTen.Value = txtName.Text.Trim();
             SqlParameter price = command.Parameters.Add("fDongia", SqlDbType.Real);
             price.Value = txtPrice.Text.Trim();
             SqlParameter amount = command.Parameters.Add("iSoluong", SqlDbType.Int);
@@ -101,7 +101,7 @@ namespace QLCF
             command.ExecuteNonQuery();
             connection.Close();
 
-            MessageBox.Show("Thêm mới thành công!");
+            MessageBox.Show("Thêm mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 

@@ -15,11 +15,12 @@ namespace QLCF
     public partial class FormAddCategory : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
-
-        public FormAddCategory(string type)
+        string typeForm, cateName;
+        int cateId;
+        public FormAddCategory(string type, int id, string name)
         {
             InitializeComponent();
-            string typeForm = type;
+            typeForm = type;
             if (typeForm == "new")
             {
                 this.Text = "Thêm mới loại đồ uống";
@@ -27,10 +28,11 @@ namespace QLCF
             else if (typeForm == "edit")
             {
                 this.Text = "Sửa loại đồ uống";
+                txtHoten.Text = cateName;
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
             {
@@ -43,10 +45,9 @@ namespace QLCF
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Bạn có muốn hủy?", "Hủy", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dr = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                txtHoten.Text = "";
                 Close();
             }
         }
@@ -88,7 +89,34 @@ namespace QLCF
             command.ExecuteNonQuery();
             connection.Close();
 
-            MessageBox.Show("Thêm mới thành công!");
+            MessageBox.Show("Thêm mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (ValidateChildren(ValidationConstraints.Enabled))
+            {
+                saveChange();
+            }
+        }
+        public void saveChange()
+        {
+            var connection = new SqlConnection(connectionString);
+            var command = new SqlCommand("editCategory", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter id = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
+            id.Value = cateId;
+            SqlParameter hoTen = command.Parameters.Add("sTenloaidouong", SqlDbType.NVarChar, 20);
+            hoTen.Value = txtHoten.Text.Trim();
+
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 

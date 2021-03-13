@@ -50,7 +50,7 @@ namespace QLCF
             this.rbAdmin = new System.Windows.Forms.RadioButton();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorHoten = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorAddress = new System.Windows.Forms.ErrorProvider(this.components);
@@ -59,6 +59,7 @@ namespace QLCF
             this.errorStatus = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorIsAdmin = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorDoB = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnEdit = new System.Windows.Forms.Button();
             this.gbGender.SuspendLayout();
             this.gbStatus.SuspendLayout();
             this.gbIsAdmin.SuspendLayout();
@@ -268,18 +269,18 @@ namespace QLCF
             this.label2.TabIndex = 50;
             this.label2.Text = "Mật khẩu:";
             // 
-            // btnEdit
+            // btnAdd
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(180, 164);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(51, 40);
-            this.btnEdit.TabIndex = 52;
-            this.btnEdit.Text = "Lưu";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.Location = new System.Drawing.Point(163, 164);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(51, 40);
+            this.btnAdd.TabIndex = 52;
+            this.btnAdd.Text = "Lưu";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -322,12 +323,26 @@ namespace QLCF
             // 
             this.errorDoB.ContainerControl = this;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(163, 164);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(51, 40);
+            this.btnEdit.TabIndex = 53;
+            this.btnEdit.Text = "Lưu";
+            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // FormAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 216);
             this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
@@ -383,7 +398,7 @@ namespace QLCF
         private System.Windows.Forms.RadioButton rbAdmin;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorHoten;
         private System.Windows.Forms.ErrorProvider errorAddress;
@@ -392,5 +407,6 @@ namespace QLCF
         private System.Windows.Forms.ErrorProvider errorStatus;
         private System.Windows.Forms.ErrorProvider errorIsAdmin;
         private System.Windows.Forms.ErrorProvider errorDoB;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
