@@ -18,104 +18,93 @@ namespace QLCF
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
         String hoten, diachi, gioitinh, status, sodienthoai, password, isAdmin;
         DateTime DoB;
-        int isadmin;
+        int isadmin, empid;
+        private string typeForm;
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
             {
-                checkEmployeeExist();
+                if (!checkEmployeeExist())
+                {
+                    saveData();
+                }
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Bạn có muốn hủy?", "Hủy", MessageBoxButtons.YesNo);
+            DialogResult dr = MessageBox.Show("Bạn có muốn thoát?", "Thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                txtHoten.Text = "";
-                txtAddress.Text = "";
-                txtSDT.Text = "";
-                txtPassword.Text = "123456";
-                dtPickerDoB.Value = DateTime.Now;
-                rbNam.Checked = false;
-                rbNu.Checked = false;
-                rbNotWorking.Checked = false;
-                rbWorking.Checked = false;
-                rbAdmin.Checked = false;
-                rbNotAdmin.Checked = false;
-                btnEdit.Enabled = false;
+                Close();
             }
         }
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (ValidateChildren(ValidationConstraints.Enabled))
+            {
+                saveChange();
+            }
+        }
 
-        public FormAddEmployee()
+        public FormAddEmployee(string type,int empId, string empName, string empPhone, string empAddress, Boolean empStatus, Boolean empGender, DateTime empDoB, Boolean empIsAdmin)
         {
             InitializeComponent();
+            typeForm = type;
+            if (typeForm == "new")
+            {
+                this.Text = "Thêm mới nhân viên";
+            }
+            else if (typeForm == "edit")
+            {
+                this.Text = "Sửa nhân viên";
+                txtHoten.Text = empName;
+                txtSDT.Text = empPhone;
+                txtAddress.Text = empAddress;
+                dtPickerDoB.Value = empDoB;
+                empid = empId;
+                if (empGender == true)
+                {
+                    rbNam.Checked = true;
+                }
+                else
+                {
+                    rbNu.Checked = true;
+                }
+                if (empStatus == true)
+                {
+                    rbWorking.Checked = true;
+                }
+                else
+                {
+                    rbNotWorking.Checked = true;
+                }
+                if (empIsAdmin == true)
+                {
+                    rbAdmin.Checked = true;
+                }
+                else
+                {
+                    rbNotAdmin.Checked = true;
+                }
+            }
         }
 
         private void FormAddEmployee_Load(object sender, EventArgs e)
         {
             txtPassword.Text = "123456";
-        }
-
-        public void checkNV()
-        {
-            hoten = txtHoten.Text.Trim();
-            diachi = txtAddress.Text.Trim();
-            sodienthoai = txtSDT.Text.Trim();
-            password = txtPassword.Text.Trim();
-            DoB = dtPickerDoB.Value;
-
-            var today = DateTime.Today;
-            decimal age = today.Year - DoB.Year;
-
-            if (hoten == "")
+            if (typeForm == "add")
             {
-                MessageBox.Show("Vui lòng nhập họ tên.");
-                txtHoten.Focus();
+                btnAdd.Visible = true;
+                btnEdit.Visible = false;
             }
-            if (sodienthoai == "")
+            if (typeForm == "edit")
             {
-                MessageBox.Show("Vui lòng nhập số điện thoại.");
-                txtSDT.Focus();
-            }
-            else if (sodienthoai.Length < 10 || sodienthoai.Length > 10)
-            {
-                MessageBox.Show("Số điện thoại phải đủ 10 chữ số.");
-                txtSDT.Focus();
-            }
-            else if (sodienthoai.Length == 10)
-            {
-                /*Regex phoneNumpattern = new Regex(@"^(\+[0-9]{9})$");
-                if (phoneNumpattern.IsMatch(sodienthoai) == false)
-                {
-                    MessageBox.Show("Sai định dạng số điện thoại, vui lòng nhập lại.");
-                    txtSDT.Focus();
-                }
-                else
-                {*/
-                checkEmployeeExist();
-            }
-            if (diachi == "")
-            {
-                MessageBox.Show("Vui lòng nhập địa chỉ.");
-                txtAddress.Focus();
-            }
-            else if (age < 18)
-            {
-                MessageBox.Show("Số tuổi phải lớn hơn 18.");
-                dtPickerDoB.Focus();
-            }
-
-            else if (gioitinh == null)
-            {
-                MessageBox.Show("Vui lòng chọn giới tính.");
-            }
-
-            else if (status == null)
-            {
-                MessageBox.Show("Vui lòng chọn trạng thái làm việc.");
+                btnAdd.Visible = false;
+                btnEdit.Visible = true;
+                txtSDT.Enabled = false;
             }
         }
 
@@ -146,11 +135,40 @@ namespace QLCF
             command.ExecuteNonQuery();
             connection.Close();
 
-            MessageBox.Show("Thêm mới nhân viên thành công!");
+            MessageBox.Show("Thêm mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
 
-        public void checkEmployeeExist()
+        public void saveChange()
+        {
+            var connection = new SqlConnection(connectionString);
+            var command = new SqlCommand("editNV", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter id = command.Parameters.Add("iMaNV", SqlDbType.Int);
+            id.Value = empid;
+            SqlParameter hoTen = command.Parameters.Add("sHoten", SqlDbType.NVarChar, 50);
+            hoTen.Value = hoten;
+            SqlParameter diaChi = command.Parameters.Add("sDiachi", SqlDbType.NVarChar, 50);
+            diaChi.Value = diachi;
+            SqlParameter Dob = command.Parameters.Add("dNgaysinh", SqlDbType.Date);
+            Dob.Value = DoB;
+            SqlParameter gender = command.Parameters.Add("sGioitinh", SqlDbType.NVarChar, 10);
+            gender.Value = gioitinh;
+            SqlParameter workingSTT = command.Parameters.Add("status", SqlDbType.NVarChar, 20);
+            workingSTT.Value = status;
+            SqlParameter isAdmin = command.Parameters.Add("isAdmin", SqlDbType.Bit);
+            isAdmin.Value = isadmin;
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
+        }
+
+        public bool checkEmployeeExist()
         {
             var connection = new SqlConnection(connectionString);
             var command = new SqlCommand("checkEmployeeExist", connection);
@@ -164,20 +182,14 @@ namespace QLCF
             var dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             if (dataReader.HasRows)
             {
-                if (dataReader.Read())
-                {
-                    string SDT = dataReader.GetString(0);
-                    if (sodienthoai == SDT)
-                    {
-                        MessageBox.Show("Đã tồn tại nhân viên có số điện thoại " + SDT + "!");
-                        connection.Close();
-                    }
-                }
+                MessageBox.Show("Số điện thoại đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSDT.Focus();
+                return true;
             }
             else
             {
-                saveData();
                 connection.Close();
+                return false;
             }
         }
         private void rbAdmin_CheckedChanged(object sender, EventArgs e)
@@ -245,6 +257,7 @@ namespace QLCF
                 errorHoten.SetError(txtHoten, "");
             }
         }
+
         private void txtAddress_Validating(object sender, CancelEventArgs e)
         {
             diachi = txtAddress.Text.Trim();
