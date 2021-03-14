@@ -22,5 +22,15 @@ namespace QLCF.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-GVL37U5;Initial Catalog=QL_QuanCafe;Integrated Security=True")]
+        public string QL_QuanCafeConnectionString {
+            get {
+                return ((string)(this["QL_QuanCafeConnectionString"]));
+            }
+        }
     }
 }

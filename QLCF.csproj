@@ -34,6 +34,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -54,6 +59,8 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +73,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <Compile Include="crHoaDon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>crHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DAO\BillDAO.cs" />
+    <Compile Include="DAO\BillinforDAO.cs" />
+    <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\SanPhamDAO.cs" />
+    <Compile Include="DAO\SanPhamOderDAO.cs" />
+    <Compile Include="DTO\cBill.cs" />
+    <Compile Include="DTO\cBillinfor.cs" />
+    <Compile Include="DTO\cSanPham.cs" />
+    <Compile Include="DTO\cSanPhamOder.cs" />
+=======
     <Compile Include="FormAddBeverage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +108,7 @@
     <Compile Include="FormResetPW.Designer.cs">
       <DependentUpon>FormResetPW.cs</DependentUpon>
     </Compile>
+>>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
     <Compile Include="FormAddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,13 +133,43 @@
     <Compile Include="FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="fPhaChe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fPhaChe.Designer.cs">
+      <DependentUpon>fPhaChe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fTaoHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fTaoHoaDon.Designer.cs">
+      <DependentUpon>fTaoHoaDon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fThanhToan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fThanhToan.Designer.cs">
+      <DependentUpon>fThanhToan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
+    <Compile Include="rpHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="rpHoaDon.Designer.cs">
+      <DependentUpon>rpHoaDon.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="crHoaDon.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>crHoaDon.cs</LastGenOutput>
+=======
     <EmbeddedResource Include="FormAddBeverage.resx">
       <DependentUpon>FormAddBeverage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddCategory.resx">
       <DependentUpon>FormAddCategory.cs</DependentUpon>
+>>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddEmployee.resx">
       <DependentUpon>FormAddEmployee.cs</DependentUpon>
@@ -128,8 +183,19 @@
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
+    <EmbeddedResource Include="fPhaChe.resx">
+      <DependentUpon>fPhaChe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fTaoHoaDon.resx">
+      <DependentUpon>fTaoHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fThanhToan.resx">
+      <DependentUpon>fThanhToan.cs</DependentUpon>
+=======
     <EmbeddedResource Include="FormResetPW.resx">
       <DependentUpon>FormResetPW.cs</DependentUpon>
+>>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,6 +207,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="rpHoaDon.resx">
+      <DependentUpon>rpHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,6 +223,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

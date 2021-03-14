@@ -295,47 +295,6 @@ namespace QLCF
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // errorHoten
-            // 
-            this.errorHoten.ContainerControl = this;
-            // 
-            // errorAddress
-            // 
-            this.errorAddress.ContainerControl = this;
-            // 
-            // errorSDT
-            // 
-            this.errorSDT.ContainerControl = this;
-            // 
-            // errorGender
-            // 
-            this.errorGender.ContainerControl = this;
-            // 
-            // errorStatus
-            // 
-            this.errorStatus.ContainerControl = this;
-            // 
-            // errorIsAdmin
-            // 
-            this.errorIsAdmin.ContainerControl = this;
-            // 
-            // errorDoB
-            // 
-            this.errorDoB.ContainerControl = this;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(163, 164);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(51, 40);
-            this.btnEdit.TabIndex = 53;
-            this.btnEdit.Text = "Lưu";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
             // FormAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,5 +367,6 @@ namespace QLCF
         private System.Windows.Forms.ErrorProvider errorIsAdmin;
         private System.Windows.Forms.ErrorProvider errorDoB;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
