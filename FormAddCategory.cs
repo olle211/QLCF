@@ -19,16 +19,22 @@ namespace QLCF
         int cateId;
         public FormAddCategory(string type, int id, string name)
         {
+            cateId = id; cateName = name;
             InitializeComponent();
             typeForm = type;
-            if (typeForm == "new")
+            if (typeForm == "add")
             {
                 this.Text = "Thêm mới loại đồ uống";
+                btnAdd.Visible = true;
+                btnEdit.Visible = false;
             }
             else if (typeForm == "edit")
             {
                 this.Text = "Sửa loại đồ uống";
-                txtHoten.Text = cateName;
+                txtHoten.Text = name;
+                txtAddress.Text = id.ToString();
+                btnAdd.Visible = false;
+                btnEdit.Visible = true;
             }
         }
 
@@ -106,6 +112,7 @@ namespace QLCF
             var command = new SqlCommand("editCategory", connection);
             command.CommandType = CommandType.StoredProcedure;
 
+            
             SqlParameter id = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
             id.Value = cateId;
             SqlParameter hoTen = command.Parameters.Add("sTenloaidouong", SqlDbType.NVarChar, 20);

@@ -16,10 +16,11 @@ namespace QLCF
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
         String username, type;
-        string empName, empPhone, empAddress, cateName;
+        string empName, empPhone, empAddress, cateName, bevName, bevCateName;
         DateTime empDoB;
         Boolean empIsAdmin, empGender, empStatus;
-        int empId, cateId;
+        int empId, cateId, bevId, bevCateId, bevAmount;
+        float bevPrice;
 
         public FormAdmin(string _username)
         {
@@ -105,6 +106,15 @@ namespace QLCF
                 MessageBox.Show("Không thể xóa được", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void btnEditBeverage_Click(object sender, EventArgs e)
+        {
+            type = "edit";
+            FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName);
+            FormAddBeverage.ShowDialog();
+            Show();
+            ReloadForm();
+        }
+
         private void btnEdit_Click(object sender, EventArgs e)
         {
             type = "edit";
@@ -112,21 +122,6 @@ namespace QLCF
             FormAddEmployee.ShowDialog();
             Show();
             ReloadForm();
-        }
-
-        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                dataGridViewCategory.CurrentRow.Selected = true;
-                btnDelete.Enabled = true;
-                btnEdit.Enabled = true;
-                btnAdd.Enabled = false;
-                btnReport.Enabled = false;
-
-                cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
-                cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
-            }
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
@@ -150,7 +145,7 @@ namespace QLCF
         private void button9_Click(object sender, EventArgs e)
         {
             type = "new";
-            FormAddBeverage FormAddBeverage = new FormAddBeverage(type);
+            FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName);
             FormAddBeverage.ShowDialog();
             Show();
             ReloadForm();
@@ -164,7 +159,6 @@ namespace QLCF
                 btnDelete.Enabled = true;
                 btnEdit.Enabled = true;
                 btnAdd.Enabled = false;
-                btnReport.Enabled = false;
 
                 empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
                 empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
@@ -198,6 +192,36 @@ namespace QLCF
                     empIsAdmin = false;
 
                 }
+            }
+        }
+        
+        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataGridViewCategory.CurrentRow.Selected = true;
+                btnDeleteCategory.Enabled = true;
+                btnEditCategory.Enabled = true;
+                btnAddCategory.Enabled = false;
+
+                cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
+                cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
+            }
+        }
+        private void dataGridViewBeverage_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridViewBeverage.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+            {
+                dataGridViewBeverage.CurrentRow.Selected = true;
+                btnDeleteBeverage.Enabled = true;
+                btnEditBeverage.Enabled = true;
+                btnAddBeverage.Enabled = false;
+
+                bevId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMadouong"].FormattedValue);
+                bevName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTendouong"].FormattedValue.ToString());
+                bevAmount = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iSoluong"].FormattedValue);
+                bevPrice = float.Parse(dataGridViewBeverage.Rows[e.RowIndex].Cells["fDongia"].FormattedValue.ToString());
+                bevCateName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["Tenloaidouong"].FormattedValue.ToString());
             }
         }
 

@@ -15,7 +15,7 @@ namespace QLCF
     public partial class FormAddBeverage : Form
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
-        int categoryId;
+        int categoryId, bevid;
         string categoryName;
         class Category
         {
@@ -23,21 +23,53 @@ namespace QLCF
 
             public string nameCategory { get; set; }
         }
-        public FormAddBeverage(string type)
+        private void FormAddBeverage_Load(object sender, EventArgs e)
+        {
+            var connection = new SqlConnection(connectionString);
+            SqlCommand command = new SqlCommand("returnCategory", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            connection.Open();
+            SqlDataReader drCategory = command.ExecuteReader();
+            if (drCategory.HasRows)
+            {
+                while (drCategory.Read())
+                {
+                    comboBoxCategory.Items.Add(new Category()
+                    {
+                        idCategory = drCategory.GetInt32(0),
+                        nameCategory = drCategory.GetString(1)
+                    });
+                }
+                comboBoxCategory.DisplayMember = "nameCategory";
+                comboBoxCategory.ValueMember = "idCategory";
+            }
+            connection.Close();
+        }
+        public FormAddBeverage(string type, int bevId, string bevName, float bevPrice, int bevAmount, string bevCateName)
         {
             InitializeComponent();
+            bevid = bevId;
             string typeForm = type;
             if (typeForm == "new")
             {
                 this.Text = "Thêm mới đồ uống";
+                btnAdd.Visible = true;
+                btnEdit.Visible = false;
             }
             else if (typeForm == "edit")
             {
                 this.Text = "Sửa đồ uống";
+                txtHoten.Text = bevId.ToString();
+                txtName.Text = bevName;
+                txtPrice.Text = bevPrice.ToString();
+                txtAmount.Text = bevAmount.ToString();
+                comboBoxCategory.Text = bevCateName;
+                btnAdd.Visible = false;
+                btnEdit.Visible = true;
             }
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
             if (ValidateChildren(ValidationConstraints.Enabled))
             {
@@ -46,6 +78,37 @@ namespace QLCF
                     saveData();
                 }
             }
+        }
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (ValidateChildren(ValidationConstraints.Enabled))
+            {
+                saveChange();
+            }
+        }
+        public void saveChange()
+        {
+            var connection = new SqlConnection(connectionString);
+            var command = new SqlCommand("editBeverage", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter id = command.Parameters.Add("iMadouong", SqlDbType.Int);
+            id.Value = bevid;
+            SqlParameter hoTen = command.Parameters.Add("sTendouong", SqlDbType.NVarChar, 20);
+            hoTen.Value = txtName.Text.Trim();
+            SqlParameter donGia = command.Parameters.Add("fDongia", SqlDbType.Float);
+            donGia.Value = txtPrice.Text.Trim();
+            SqlParameter soLg = command.Parameters.Add("iSoluong", SqlDbType.Int);
+            soLg.Value = txtAmount.Text.Trim();
+            SqlParameter cateid = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
+            cateid.Value = categoryId;
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -71,7 +134,7 @@ namespace QLCF
             var dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             if (dataReader.HasRows)
             {
-                MessageBox.Show("Loại đồ uống đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Đồ uống đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtHoten.Focus();
                 return true;
             }
@@ -165,10 +228,10 @@ namespace QLCF
         }
         private void txtCategory_Validating(object sender, CancelEventArgs e)
         {
-            if(comboBoxCategory.SelectedIndex != -1)
+            if (comboBoxCategory.SelectedIndex != -1)
             {
                 Category selectedItem = comboBoxCategory.SelectedItem as Category;
-                if(selectedItem == null)
+                if (selectedItem == null)
                 {
                     e.Cancel = true;
                     comboBoxCategory.Focus();
@@ -180,29 +243,6 @@ namespace QLCF
                     errorCategory.SetError(comboBoxCategory, "");
                 }
             }
-        }
-
-        private void FormAddBeverage_Load(object sender, EventArgs e)
-        {
-            var connection = new SqlConnection(connectionString);
-            SqlCommand command = new SqlCommand("returnCategory", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            connection.Open();
-            SqlDataReader drCategory = command.ExecuteReader();
-            if (drCategory.HasRows)
-            {
-                while (drCategory.Read())
-                {
-                    comboBoxCategory.Items.Add(new Category()
-                    {
-                        idCategory = drCategory.GetInt32(0),
-                        nameCategory = drCategory.GetString(1)
-                    });
-                }
-                comboBoxCategory.DisplayMember = "nameCategory";
-                comboBoxCategory.ValueMember = "idCategory";
-            }
-            connection.Close();
         }
     }
 }

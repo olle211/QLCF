@@ -169,9 +169,9 @@ as
 	END
 
 /*proc sửa loại đồ uống*/
-create proc editCategory 
+alter proc editCategory 
 @iMaloaidouong int,
-@sTenloaidouong varchar (20)
+@sTenloaidouong nvarchar (20)
 as 
 update tblLoaidouong
 set sTenloaidouong = @sTenloaidouong
@@ -184,6 +184,20 @@ as
 DELETE
 from tblLoaidouong
 WHERE iMaloaidouong = @iMaloaidouong 
+
+alter view vvSolgDouongtheoLoai (maLoaidouong, tenLoaidouong, soluongdouong)
+as
+select tblLoaidouong.iMaloaidouong, tblLoaidouong.sTenloaidouong, count(tblDouong.iMadouong)
+from tblLoaidouong join tblDouong 
+on tblDouong.iMaloaidouong = tblLoaidouong.iMaloaidouong
+group by tblLoaidouong.iMaloaidouong, tblLoaidouong.sTenloaidouong
+
+select * from vvSolgDouongtheoLoai
+
+/* kiểm tra ràng buộc loại đồ uống - đồ uống trước khi xóa */
+create proc checkContraintCateBeverage
+as
+select 
 
 /*tạo proc trả dữ liệu của bảng loại đồ uống */
 create proc returnCategory
@@ -230,7 +244,7 @@ WHERE iMadouong = @iMadouong
 /*tạo proc trả dữ liệu của bảng đồ uống */
 alter proc returnBeverage
 as 
-select tblDouong.iMadouong, tblDouong.sTendouong, tblDouong.iSoluong, tblDouong.fDongia, tblLoaidouong.sTenloaidouong
+select tblDouong.iMadouong, tblDouong.sTendouong, tblDouong.iSoluong, tblDouong.fDongia, tblLoaidouong.sTenloaidouong, tblDouong.iMaloaidouong
 from tblDouong, tblLoaidouong
 where tblDouong.iMaloaidouong = tblLoaidouong.iMaloaidouong
 exec returnBeverage

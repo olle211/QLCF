@@ -41,12 +41,13 @@ namespace QLCF
             this.label1 = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.errorName = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorPrice = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorAmount = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorCategory = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnEdit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorName)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorAmount)).BeginInit();
@@ -140,18 +141,18 @@ namespace QLCF
             this.label2.TabIndex = 47;
             this.label2.Text = "Số lượng:";
             // 
-            // btnEdit
+            // btnAdd
             // 
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(179, 139);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(51, 40);
-            this.btnEdit.TabIndex = 54;
-            this.btnEdit.Text = "Lưu";
-            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.Location = new System.Drawing.Point(179, 139);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(51, 40);
+            this.btnAdd.TabIndex = 54;
+            this.btnAdd.Text = "Lưu";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnCancel
             // 
@@ -182,12 +183,26 @@ namespace QLCF
             // 
             this.errorCategory.ContainerControl = this;
             // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(179, 139);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(51, 40);
+            this.btnEdit.TabIndex = 55;
+            this.btnEdit.Text = "Lưu";
+            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // FormAddBeverage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 191);
             this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label2);
@@ -223,11 +238,12 @@ namespace QLCF
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorName;
         private System.Windows.Forms.ErrorProvider errorPrice;
         private System.Windows.Forms.ErrorProvider errorAmount;
         private System.Windows.Forms.ErrorProvider errorCategory;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
