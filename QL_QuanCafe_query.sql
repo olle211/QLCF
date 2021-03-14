@@ -145,13 +145,10 @@ CREATE proc LoginCheck
 as
 select sHoten, sSDT, isAdmin, sMatkhau
 from tblNhanvien 
-<<<<<<< HEAD
-where iSDT = @username and sMatkhau = @password
-=======
 where sSDT = @username and sMatkhau = @password
 
 exec LoginCheck '0987654321', 123456
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
+
 
 --exec LoginCheck '0912345677', admin100
 GO
@@ -165,17 +162,17 @@ INSERT INTO tblNhanvien(sHoten, sGioitinh, iSDT, sDiachi, dNgaysinh, iMaCV, sTra
 VALUES ( 'Đồng Duy Phương', 'nam', '0123', 'dinh cong', '02-11-1998', 2, 'dang lam',0, 'a');
 GO
 /*tạo proc thêm nhân viên */
-<<<<<<< HEAD
+
 CREATE proc addNV
 @sHoten varchar (50),
 @sGioitinh nvarchar (10),
 @iSDT INT,
-=======
+
 alter proc addNV
 @sHoten varchar (50),
 @sGioitinh nvarchar (10),
 @sSDT varchar(10),
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
+
 @sDiachi varchar(50),
 @dNgaysinh date,
 @status nvarchar (20),
@@ -185,7 +182,7 @@ alter proc addNV
 as
 	BEGIN
 		insert into tblNhanvien
-<<<<<<< HEAD
+
 		values (@sHoten,@sGioitinh,@iSDT,@sDiachi,@dNgaysinh,@iMaCV, @status, @isAdmin, @password);
 	END
 
@@ -197,7 +194,7 @@ GO
 
 	drop proc addNV
 	
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
+
 /*check nhân viên tồn tại*/
 create proc checkEmployeeExist
 @sSDT varchar(10)
@@ -226,7 +223,7 @@ exec checkEmployeeExist '0912345670'
 alter proc returnNV
 as 
 select iMaNV, sHoten, sGioitinh,sSDT, sDiachi, dNgaysinh, sTrangthai, isAdmin
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
+
 from tblNhanvien
 
 exec returnNV
