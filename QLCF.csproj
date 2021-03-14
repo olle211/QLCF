@@ -73,7 +73,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="crHoaDon.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,7 +88,6 @@
     <Compile Include="DTO\cBillinfor.cs" />
     <Compile Include="DTO\cSanPham.cs" />
     <Compile Include="DTO\cSanPhamOder.cs" />
-=======
     <Compile Include="FormAddBeverage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,7 +106,6 @@
     <Compile Include="FormResetPW.Designer.cs">
       <DependentUpon>FormResetPW.cs</DependentUpon>
     </Compile>
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
     <Compile Include="FormAddEmployee.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,7 +150,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="rpHoaDon.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,13 +159,12 @@
     <EmbeddedResource Include="crHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crHoaDon.cs</LastGenOutput>
-=======
+	</EmbeddedResource>
     <EmbeddedResource Include="FormAddBeverage.resx">
       <DependentUpon>FormAddBeverage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddCategory.resx">
       <DependentUpon>FormAddCategory.cs</DependentUpon>
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
     </EmbeddedResource>
     <EmbeddedResource Include="FormAddEmployee.resx">
       <DependentUpon>FormAddEmployee.cs</DependentUpon>
@@ -183,7 +178,7 @@
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-<<<<<<< HEAD
+
     <EmbeddedResource Include="fPhaChe.resx">
       <DependentUpon>fPhaChe.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,10 +187,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fThanhToan.resx">
       <DependentUpon>fThanhToan.cs</DependentUpon>
-=======
+	</EmbeddedResource>
     <EmbeddedResource Include="FormResetPW.resx">
       <DependentUpon>FormResetPW.cs</DependentUpon>
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
+
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
