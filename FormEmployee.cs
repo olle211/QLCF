@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using System.Windows.Forms;
+using QLCF.DTO;
+using QLCF.DAO;
 
 namespace QLCF
 {
@@ -41,6 +43,15 @@ namespace QLCF
         private void btnDSChoPhaChe_Click(object sender, EventArgs e)
         {
             fPhaChe f = new fPhaChe();
+            f.ShowDialog();
+        }
+
+        private void thôngTinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cNhanVien nv = new cNhanVien();
+            nv = NhanVienDAO.Instance.TTNhanVienLogin(Convert.ToInt32(Program.MaNVLogin));
+            NVLoginDetail f = new NVLoginDetail();
+            f.loadNVLogin(nv);
             f.ShowDialog();
         }
     }
