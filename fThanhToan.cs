@@ -45,6 +45,7 @@ namespace QLCF
                     list.Add(item);
                 }
             }
+            
             cbbHoaDon.DataSource = null;
             cbbHoaDon.DataSource = list;
             cbbHoaDon.DisplayMember = "ISoHD";
@@ -57,8 +58,12 @@ namespace QLCF
             {
                 cBill bill = new cBill();
                 bill = (cBill)cbbHoaDon.SelectedValue;
-                mabill = (int)bill.ISoHD;
-                ShowCT_HD(mabill);
+                if (bill != null)
+                {
+                    mabill = (int)bill.ISoHD;
+                    ShowCT_HD(mabill);
+                }
+                
             }
             
         }
@@ -68,24 +73,28 @@ namespace QLCF
         //show ra ma hd, ngay lap va ds san pham cua hd
         void ShowCT_HD(int maHD)
         {
-            foreach(cBill item in list)
+            lvDSSP.Items.Clear();
+            if (list.Count > 0)
             {
-                if(maHD== item.ISoHD)
+                foreach (cBill item in list)
                 {
-                    lblMaHD.Text = maHD.ToString();
-                    lblNgayLap.Text = item.DNgaylap.Value.ToString("yyyy-MM-dd");
+                    if (maHD == item.ISoHD)
+                    {
+                        lblMaHD.Text = maHD.ToString();
+                        lblNgayLap.Text = item.DNgaylap.Value.ToString("yyyy-MM-dd");
+                    }
+                }
+                listSPOder = SanPhamOderDAO.Instance.listSPOder(maHD);
+                foreach (cSanPhamOder sp in listSPOder)
+                {
+                    ListViewItem lvitem = new ListViewItem(sp.IMaSP.ToString());
+                    lvitem.SubItems.Add(sp.STenSP.ToString());
+                    lvitem.SubItems.Add(sp.ISoluong.ToString());
+                    lvitem.SubItems.Add(sp.FDongia.ToString());
+                    lvDSSP.Items.Add(lvitem);
                 }
             }
-            listSPOder = SanPhamOderDAO.Instance.listSPOder(maHD);
-            lvDSSP.Items.Clear();
-            foreach(cSanPhamOder sp in listSPOder)
-            {
-                ListViewItem lvitem = new ListViewItem(sp.IMaSP.ToString());
-                lvitem.SubItems.Add(sp.STenSP.ToString());
-                lvitem.SubItems.Add(sp.ISoluong.ToString());
-                lvitem.SubItems.Add(sp.FDongia.ToString());
-                lvDSSP.Items.Add(lvitem);
-            }
+            
         }
 
 
@@ -101,13 +110,22 @@ namespace QLCF
                     {
                         BillDAO.Instance.ThanhToanHD(mabill);
                         MessageBox.Show("Đã thanh toán hóa đơn có mã: " + mabill);
-                        this.Refresh();
+                        mabill = -1;
+                        lvDSSP.Items.Clear();
+                        lblMaHD.Text = "";
+                        lblNgayLap.Text = "";
+                        
+                        layDSHD();
                         return;
+                        
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Chưa đạt điều kiện thanh toán!");
                     }
                 }
-            }
-            //this.Refresh();
-            MessageBox.Show("Chưa đạt điều kiện thanh toán!");    
-        } 
+            }   
+        }
     }
 }

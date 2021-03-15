@@ -33,5 +33,20 @@ namespace QLCF.DAO
 
             return nv;
         }
+
+        public Boolean updateMatKhau(int maNV, string mkMoi)
+        {
+            
+                string query = "UPDATE dbo.tblNhanvien SET sMatkhau='"+mkMoi+"' WHERE iMaNV="+maNV;
+                int i = DataProvider.Instance.ExcuteNonQuery(query);
+                if (i > 0)
+                {
+                    return true;
+                }
+           
+            return false;
+            
+
+        }
     }
 }

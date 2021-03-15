@@ -39,39 +39,48 @@ namespace QLCF
             this.label1 = new System.Windows.Forms.Label();
             this.cbbMenu = new System.Windows.Forms.ComboBox();
             this.btnXoaSP = new System.Windows.Forms.Button();
-            this.tbGhiChu = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSLcon = new System.Windows.Forms.Label();
-            this.slSP = new System.Windows.Forms.Label();
             this.HD_SoLuong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HD_Gia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HD_TenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.HD_MaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvHoaDon = new System.Windows.Forms.DataGridView();
+            this.numericSLXoa = new System.Windows.Forms.NumericUpDown();
+            this.panelXoa = new System.Windows.Forms.Panel();
+            this.lblTenSPxoa = new System.Windows.Forms.Label();
+            this.lblMaSPxoa = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblCheckedIndex = new System.Windows.Forms.Label();
+            this.btnThanhToan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericSoluong)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSLXoa)).BeginInit();
+            this.panelXoa.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnXong
             // 
             this.btnXong.Location = new System.Drawing.Point(344, 335);
             this.btnXong.Name = "btnXong";
-            this.btnXong.Size = new System.Drawing.Size(75, 23);
+            this.btnXong.Size = new System.Drawing.Size(112, 23);
             this.btnXong.TabIndex = 2;
-            this.btnXong.Text = "Xong";
+            this.btnXong.Text = "Chuyển pha chế";
             this.btnXong.UseVisualStyleBackColor = true;
             this.btnXong.Click += new System.EventHandler(this.btnXong_Click);
             // 
             // numericSoluong
             // 
-            this.numericSoluong.Location = new System.Drawing.Point(289, 70);
+            this.numericSoluong.Location = new System.Drawing.Point(289, 71);
             this.numericSoluong.Name = "numericSoluong";
             this.numericSoluong.Size = new System.Drawing.Size(48, 20);
             this.numericSoluong.TabIndex = 3;
             // 
             // btnThemSP
             // 
+            this.btnThemSP.Enabled = false;
             this.btnThemSP.Location = new System.Drawing.Point(344, 70);
             this.btnThemSP.Name = "btnThemSP";
             this.btnThemSP.Size = new System.Drawing.Size(50, 23);
@@ -128,53 +137,39 @@ namespace QLCF
             // cbbMenu
             // 
             this.cbbMenu.FormattingEnabled = true;
-            this.cbbMenu.Location = new System.Drawing.Point(43, 43);
+            this.cbbMenu.Location = new System.Drawing.Point(18, 71);
             this.cbbMenu.Name = "cbbMenu";
-            this.cbbMenu.Size = new System.Drawing.Size(240, 21);
+            this.cbbMenu.Size = new System.Drawing.Size(187, 21);
             this.cbbMenu.TabIndex = 6;
             this.cbbMenu.SelectedValueChanged += new System.EventHandler(this.cbbMenu_SelectedValueChanged);
             // 
             // btnXoaSP
             // 
-            this.btnXoaSP.Location = new System.Drawing.Point(89, 335);
+            this.btnXoaSP.Location = new System.Drawing.Point(143, 26);
             this.btnXoaSP.Name = "btnXoaSP";
-            this.btnXoaSP.Size = new System.Drawing.Size(75, 23);
+            this.btnXoaSP.Size = new System.Drawing.Size(90, 23);
             this.btnXoaSP.TabIndex = 7;
             this.btnXoaSP.Text = "Xóa";
             this.btnXoaSP.UseVisualStyleBackColor = true;
-            // 
-            // tbGhiChu
-            // 
-            this.tbGhiChu.Location = new System.Drawing.Point(43, 70);
-            this.tbGhiChu.Name = "tbGhiChu";
-            this.tbGhiChu.Size = new System.Drawing.Size(240, 20);
-            this.tbGhiChu.TabIndex = 8;
+            this.btnXoaSP.Click += new System.EventHandler(this.btnXoaSP_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(289, 46);
+            this.label2.Location = new System.Drawing.Point(211, 75);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "SL còn: ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // lblSLcon
             // 
             this.lblSLcon.AutoSize = true;
-            this.lblSLcon.Location = new System.Drawing.Point(332, 46);
+            this.lblSLcon.Location = new System.Drawing.Point(258, 75);
             this.lblSLcon.Name = "lblSLcon";
             this.lblSLcon.Size = new System.Drawing.Size(0, 13);
             this.lblSLcon.TabIndex = 10;
-            // 
-            // slSP
-            // 
-            this.slSP.AutoSize = true;
-            this.slSP.Location = new System.Drawing.Point(437, 24);
-            this.slSP.Name = "slSP";
-            this.slSP.Size = new System.Drawing.Size(25, 13);
-            this.slSP.TabIndex = 11;
-            this.slSP.Text = "slsp";
             // 
             // HD_SoLuong
             // 
@@ -210,19 +205,97 @@ namespace QLCF
             this.HD_SoLuong});
             this.dgvHoaDon.Location = new System.Drawing.Point(12, 113);
             this.dgvHoaDon.Name = "dgvHoaDon";
-            this.dgvHoaDon.Size = new System.Drawing.Size(449, 216);
+            this.dgvHoaDon.Size = new System.Drawing.Size(444, 216);
             this.dgvHoaDon.TabIndex = 1;
+            this.dgvHoaDon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHoaDon_CellClick);
+            // 
+            // numericSLXoa
+            // 
+            this.numericSLXoa.Location = new System.Drawing.Point(143, 3);
+            this.numericSLXoa.Name = "numericSLXoa";
+            this.numericSLXoa.Size = new System.Drawing.Size(90, 20);
+            this.numericSLXoa.TabIndex = 11;
+            this.numericSLXoa.ValueChanged += new System.EventHandler(this.numericSLXoa_ValueChanged);
+            // 
+            // panelXoa
+            // 
+            this.panelXoa.Controls.Add(this.lblTenSPxoa);
+            this.panelXoa.Controls.Add(this.lblMaSPxoa);
+            this.panelXoa.Controls.Add(this.label4);
+            this.panelXoa.Controls.Add(this.label3);
+            this.panelXoa.Controls.Add(this.numericSLXoa);
+            this.panelXoa.Controls.Add(this.btnXoaSP);
+            this.panelXoa.Location = new System.Drawing.Point(12, 335);
+            this.panelXoa.Name = "panelXoa";
+            this.panelXoa.Size = new System.Drawing.Size(240, 52);
+            this.panelXoa.TabIndex = 12;
+            this.panelXoa.Visible = false;
+            // 
+            // lblTenSPxoa
+            // 
+            this.lblTenSPxoa.AutoSize = true;
+            this.lblTenSPxoa.Location = new System.Drawing.Point(44, 31);
+            this.lblTenSPxoa.Name = "lblTenSPxoa";
+            this.lblTenSPxoa.Size = new System.Drawing.Size(35, 13);
+            this.lblTenSPxoa.TabIndex = 15;
+            this.lblTenSPxoa.Text = "label6";
+            // 
+            // lblMaSPxoa
+            // 
+            this.lblMaSPxoa.AutoSize = true;
+            this.lblMaSPxoa.Location = new System.Drawing.Point(44, 10);
+            this.lblMaSPxoa.Name = "lblMaSPxoa";
+            this.lblMaSPxoa.Size = new System.Drawing.Size(35, 13);
+            this.lblMaSPxoa.TabIndex = 14;
+            this.lblMaSPxoa.Text = "label5";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Tên sp:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Mã Sp:";
+            // 
+            // lblCheckedIndex
+            // 
+            this.lblCheckedIndex.AutoSize = true;
+            this.lblCheckedIndex.Location = new System.Drawing.Point(289, 344);
+            this.lblCheckedIndex.Name = "lblCheckedIndex";
+            this.lblCheckedIndex.Size = new System.Drawing.Size(35, 13);
+            this.lblCheckedIndex.TabIndex = 13;
+            this.lblCheckedIndex.Text = "label5";
+            // 
+            // btnThanhToan
+            // 
+            this.btnThanhToan.Location = new System.Drawing.Point(344, 361);
+            this.btnThanhToan.Name = "btnThanhToan";
+            this.btnThanhToan.Size = new System.Drawing.Size(112, 23);
+            this.btnThanhToan.TabIndex = 14;
+            this.btnThanhToan.Text = "Thanh toán";
+            this.btnThanhToan.UseVisualStyleBackColor = true;
+            this.btnThanhToan.Click += new System.EventHandler(this.btnThanhToan_Click);
             // 
             // fTaoHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 389);
-            this.Controls.Add(this.slSP);
+            this.Controls.Add(this.btnThanhToan);
+            this.Controls.Add(this.lblCheckedIndex);
+            this.Controls.Add(this.panelXoa);
             this.Controls.Add(this.lblSLcon);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.tbGhiChu);
-            this.Controls.Add(this.btnXoaSP);
             this.Controls.Add(this.cbbMenu);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnThemSP);
@@ -230,11 +303,16 @@ namespace QLCF
             this.Controls.Add(this.btnXong);
             this.Controls.Add(this.dgvHoaDon);
             this.Name = "fTaoHoaDon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fTaoHoaDon";
+            this.Load += new System.EventHandler(this.fTaoHoaDon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericSoluong)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSLXoa)).EndInit();
+            this.panelXoa.ResumeLayout(false);
+            this.panelXoa.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,14 +329,20 @@ namespace QLCF
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbbMenu;
         private System.Windows.Forms.Button btnXoaSP;
-        private System.Windows.Forms.TextBox tbGhiChu;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblSLcon;
-        private System.Windows.Forms.Label slSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn HD_SoLuong;
         private System.Windows.Forms.DataGridViewTextBoxColumn HD_Gia;
         private System.Windows.Forms.DataGridViewTextBoxColumn HD_TenSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn HD_MaSP;
         private System.Windows.Forms.DataGridView dgvHoaDon;
+        private System.Windows.Forms.NumericUpDown numericSLXoa;
+        private System.Windows.Forms.Panel panelXoa;
+        private System.Windows.Forms.Label lblTenSPxoa;
+        private System.Windows.Forms.Label lblMaSPxoa;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCheckedIndex;
+        private System.Windows.Forms.Button btnThanhToan;
     }
 }

@@ -54,5 +54,27 @@ namespace QLCF
             f.loadNVLogin(nv);
             f.ShowDialog();
         }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dangxuat();
+        }
+
+        void dangxuat()
+        {
+            Program.MaNVLogin = null;
+            Program.TenNVLogin = null;
+            Program.isAdmin = false;
+            this.Close();
+        }
+
+        private void dổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cNhanVien nv = new cNhanVien();
+            nv = NhanVienDAO.Instance.TTNhanVienLogin(Convert.ToInt32(Program.MaNVLogin));
+            fDoiMatKhau f = new fDoiMatKhau(nv);
+            f.ShowDialog();
+
+        }
     }
 }

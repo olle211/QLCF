@@ -115,21 +115,23 @@ namespace QLCF
             // thôngTinToolStripMenuItem
             // 
             this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.thôngTinToolStripMenuItem.Text = "Thông tin";
             this.thôngTinToolStripMenuItem.Click += new System.EventHandler(this.thôngTinToolStripMenuItem_Click);
             // 
             // dổiMậtKhẩuToolStripMenuItem
             // 
             this.dổiMậtKhẩuToolStripMenuItem.Name = "dổiMậtKhẩuToolStripMenuItem";
-            this.dổiMậtKhẩuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dổiMậtKhẩuToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.dổiMậtKhẩuToolStripMenuItem.Text = "Đổi mật khẩu";
+            this.dổiMậtKhẩuToolStripMenuItem.Click += new System.EventHandler(this.dổiMậtKhẩuToolStripMenuItem_Click);
             // 
             // đăngXuấtToolStripMenuItem
             // 
             this.đăngXuấtToolStripMenuItem.Name = "đăngXuấtToolStripMenuItem";
-            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.đăngXuấtToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.đăngXuấtToolStripMenuItem.Text = "Đăng xuất";
+            this.đăngXuấtToolStripMenuItem.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
             // FormEmployee
             // 
@@ -144,6 +146,7 @@ namespace QLCF
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormEmployee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Danh mục nhân viên";
             this.Load += new System.EventHandler(this.FormEmployee_Load);
             this.menuStrip1.ResumeLayout(false);

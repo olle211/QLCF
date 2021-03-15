@@ -94,6 +94,9 @@ namespace QLCF
             rp.ShowDialog();
             BillDAO.Instance.xacnhanPhache(mabill);
             mabill = -1;
+            lblMaHD.Text = "";
+            lblNgayLap.Text = "";
+            lvDSSP.Items.Clear();
             layDSHD();
             
             
@@ -105,6 +108,8 @@ namespace QLCF
             BillDAO.Instance.huyBill(mabill);
             mabill = -1;
             listSPOder = new List<cSanPhamOder>();
+            lblMaHD.Text = "";
+            lblNgayLap.Text = "";
             lvDSSP.Items.Clear();
             layDSHD();
 
