@@ -70,7 +70,7 @@ namespace QLCF
                 if (maHD == item.ISoHD)
                 {
                     lblMaHD.Text = maHD.ToString();
-                    lblNgayLap.Text = item.DNgaylap.Value.ToString("yyyy-MM-dd");
+                    lblNgayLap.Text = item.DNgaylap.Value.ToString("dd-MM-yyyy");
                 }
             }
             listSPOder = SanPhamOderDAO.Instance.listSPOder(maHD);
@@ -94,6 +94,9 @@ namespace QLCF
             rp.ShowDialog();
             BillDAO.Instance.xacnhanPhache(mabill);
             mabill = -1;
+            lblMaHD.Text = "";
+            lblNgayLap.Text = "";
+            lvDSSP.Items.Clear();
             layDSHD();
             
             
@@ -105,6 +108,8 @@ namespace QLCF
             BillDAO.Instance.huyBill(mabill);
             mabill = -1;
             listSPOder = new List<cSanPhamOder>();
+            lblMaHD.Text = "";
+            lblNgayLap.Text = "";
             lvDSSP.Items.Clear();
             layDSHD();
 

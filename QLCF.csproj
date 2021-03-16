@@ -82,12 +82,20 @@
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillinforDAO.cs" />
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\NhanVienDAO.cs" />
     <Compile Include="DAO\SanPhamDAO.cs" />
     <Compile Include="DAO\SanPhamOderDAO.cs" />
     <Compile Include="DTO\cBill.cs" />
     <Compile Include="DTO\cBillinfor.cs" />
+    <Compile Include="DTO\cNhanVien.cs" />
     <Compile Include="DTO\cSanPham.cs" />
     <Compile Include="DTO\cSanPhamOder.cs" />
+    <Compile Include="fDoiMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fDoiMatKhau.Designer.cs">
+      <DependentUpon>fDoiMatKhau.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormAddBeverage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +156,12 @@
     <Compile Include="fThanhToan.Designer.cs">
       <DependentUpon>fThanhToan.cs</DependentUpon>
     </Compile>
+    <Compile Include="NVLoginDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NVLoginDetail.Designer.cs">
+      <DependentUpon>NVLoginDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rpHoaDon.cs">
@@ -159,7 +173,10 @@
     <EmbeddedResource Include="crHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>crHoaDon.cs</LastGenOutput>
-	</EmbeddedResource>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fDoiMatKhau.resx">
+      <DependentUpon>fDoiMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormAddBeverage.resx">
       <DependentUpon>FormAddBeverage.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,7 +195,6 @@
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
-
     <EmbeddedResource Include="fPhaChe.resx">
       <DependentUpon>fPhaChe.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,10 +203,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fThanhToan.resx">
       <DependentUpon>fThanhToan.cs</DependentUpon>
-	</EmbeddedResource>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormResetPW.resx">
       <DependentUpon>FormResetPW.cs</DependentUpon>
-
+    </EmbeddedResource>
+    <EmbeddedResource Include="NVLoginDetail.resx">
+      <DependentUpon>NVLoginDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

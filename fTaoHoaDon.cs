@@ -52,6 +52,14 @@ namespace QLCF
         {
             cSanPham a = new cSanPham();
             a = (cSanPham)cbbMenu.SelectedItem;
+            if (a.ISoluong < 1)
+            {
+                btnThemSP.Enabled = false;
+            }
+            else
+            {
+                btnThemSP.Enabled = true;
+            }
             numericSoluong.Maximum = a.ISoluong;
             numericSoluong.Minimum = 1;
             lblSLcon.Text = a.ISoluong.ToString();
@@ -107,8 +115,16 @@ namespace QLCF
         
         private void btnXong_Click(object sender, EventArgs e)
         {
+
+            TaoHD();
+            MessageBox.Show("Đã tạo thành công hóa đơn!");
+        }
+
+
+        void TaoHD()
+        {
             //tạo bill mới với 
-            if (listSPoder.Count>0)
+            if (listSPoder.Count > 0)
             {
                 cBill bill = new cBill();
                 bill.IMaNV = Convert.ToInt32(Program.MaNVLogin);
@@ -117,7 +133,7 @@ namespace QLCF
                 BillDAO.Instance.AddBill(bill);         //thêm bill vào database
                 iSoHD = BillDAO.Instance.ManewBill();      //Dua ma hd moi dc tao thanh ma hoa don co gia tri lon nhat trong bang HoaDon
                 List<cBillinfor> bif = new List<cBillinfor>();
-                foreach(cSanPhamOder item in listSPoder)
+                foreach (cSanPhamOder item in listSPoder)
                 {
                     cBillinfor a = new cBillinfor();
                     a.ISoHD = iSoHD;
@@ -130,7 +146,7 @@ namespace QLCF
                 BillinforDAO.Instance.AddBillInfor(bif);// thêm ct_hd vào database
                 SanPhamDAO.Instance.updateSLSP(listSPoder);// update lai so luong san pham con lai
                 BillDAO.Instance.setTongTienHD(iSoHD); //set tong tien HD cho HD vua tao
-                MessageBox.Show("Đã tạo thành công hóa đơn!");
+
 
                 //reset lai ds san pham oder va cap nhat lai danh sach san pham con lai
                 dgvHoaDon.DataSource = null;
@@ -142,8 +158,82 @@ namespace QLCF
             {
                 MessageBox.Show("Chưa có sản phẩm, không tạo được hóa đơn!");
             }
-            
+        }
 
+
+
+        int maSpXoa=-1;
+        int slsp;
+
+        private void dgvHoaDon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i = e.RowIndex;
+            if (i != -1)
+            {
+                maSpXoa = Convert.ToInt32(dgvHoaDon.Rows[i].Cells[0].Value.ToString());
+                string tensp = dgvHoaDon.Rows[i].Cells[1].Value.ToString();
+                slsp = Convert.ToInt32(dgvHoaDon.Rows[i].Cells[3].Value.ToString());
+                float dongia = (float)Convert.ToDouble(dgvHoaDon.Rows[i].Cells[2].Value.ToString());
+                lblCheckedIndex.Text = i.ToString();
+                lblMaSPxoa.Text = maSpXoa.ToString();
+                lblTenSPxoa.Text = tensp;
+                panelXoa.Visible = true;
+                numericSLXoa.Maximum = slsp;
+                numericSLXoa.Minimum = 1;
+            }
+            
+            
+        }
+
+        private void btnXoaSP_Click(object sender, EventArgs e)
+        {
+            cSanPhamOder spoder=new cSanPhamOder();
+            if (maSpXoa != -1 && slsp>0)
+            {
+                
+                foreach (cSanPhamOder sp in listSPoder)
+                {
+                    
+                    if (sp.IMaSP == maSpXoa)
+                    {
+                        sp.ISoluong = sp.ISoluong - Convert.ToInt32(numericSLXoa.Value);
+                        if (sp.ISoluong <= 0)
+                        {
+                            spoder = sp;
+                        }
+
+                    }
+                }
+ 
+            }
+            listSPoder.Remove(spoder);
+            getDSSanPham();
+            LoadHD();
+
+        }
+
+        private void numericSLXoa_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericSLXoa.Value > slsp || numericSLXoa.Value < 1)
+            {
+                btnXoaSP.Enabled = false;
+            }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fTaoHoaDon_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            TaoHD();
+            BillDAO.Instance.ThanhToanHD(iSoHD);
         }
     }
 }

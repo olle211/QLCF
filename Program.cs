@@ -9,7 +9,7 @@ namespace QLCF
     static class Program
     {
 
-        public static String MaNVLogin;
+        public static string MaNVLogin;
         public static String TenNVLogin;
         public static Boolean isAdmin;
         /// <summary>
