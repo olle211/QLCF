@@ -54,6 +54,8 @@ namespace QLCF
             this.btnDeleteCategory = new System.Windows.Forms.Button();
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.dataGridViewCategory = new System.Windows.Forms.DataGridView();
+            this.iMaloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnEditBeverage = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -61,16 +63,13 @@ namespace QLCF
             this.btnDeleteBeverage = new System.Windows.Forms.Button();
             this.btnAddBeverage = new System.Windows.Forms.Button();
             this.dataGridViewBeverage = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.iMaloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iMadouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sTendouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iSoluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fDongia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maLoaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNV)).BeginInit();
@@ -95,7 +94,6 @@ namespace QLCF
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
@@ -356,6 +354,27 @@ namespace QLCF
             this.dataGridViewCategory.TabIndex = 53;
             this.dataGridViewCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCategory_CellClick);
             // 
+            // iMaloaidouong
+            // 
+            this.iMaloaidouong.DataPropertyName = "iMaloaidouong";
+            this.iMaloaidouong.DividerWidth = 1;
+            this.iMaloaidouong.FillWeight = 193.1972F;
+            this.iMaloaidouong.HeaderText = "Mã loại đồ uống";
+            this.iMaloaidouong.Name = "iMaloaidouong";
+            this.iMaloaidouong.ReadOnly = true;
+            this.iMaloaidouong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.iMaloaidouong.Width = 400;
+            // 
+            // sTenloaidouong
+            // 
+            this.sTenloaidouong.DataPropertyName = "sTenloaidouong";
+            this.sTenloaidouong.DividerWidth = 1;
+            this.sTenloaidouong.FillWeight = 6.802719F;
+            this.sTenloaidouong.HeaderText = "Tên loại đồ uống";
+            this.sTenloaidouong.Name = "sTenloaidouong";
+            this.sTenloaidouong.ReadOnly = true;
+            this.sTenloaidouong.Width = 400;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnEditBeverage);
@@ -413,6 +432,7 @@ namespace QLCF
             this.btnDeleteBeverage.Text = "Xóa";
             this.btnDeleteBeverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDeleteBeverage.UseVisualStyleBackColor = true;
+            this.btnDeleteBeverage.Click += new System.EventHandler(this.btnDeleteBeverage_Click);
             // 
             // btnAddBeverage
             // 
@@ -448,45 +468,6 @@ namespace QLCF
             this.dataGridViewBeverage.Size = new System.Drawing.Size(840, 337);
             this.dataGridViewBeverage.TabIndex = 60;
             this.dataGridViewBeverage.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBeverage_CellClick);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(840, 452);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Bàn";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(840, 452);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Thống kê doanh thu";
-            this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // iMaloaidouong
-            // 
-            this.iMaloaidouong.DataPropertyName = "iMaloaidouong";
-            this.iMaloaidouong.DividerWidth = 1;
-            this.iMaloaidouong.FillWeight = 193.1972F;
-            this.iMaloaidouong.HeaderText = "Mã loại đồ uống";
-            this.iMaloaidouong.Name = "iMaloaidouong";
-            this.iMaloaidouong.ReadOnly = true;
-            this.iMaloaidouong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.iMaloaidouong.Width = 400;
-            // 
-            // sTenloaidouong
-            // 
-            this.sTenloaidouong.DataPropertyName = "sTenloaidouong";
-            this.sTenloaidouong.DividerWidth = 1;
-            this.sTenloaidouong.FillWeight = 6.802719F;
-            this.sTenloaidouong.HeaderText = "Tên loại đồ uống";
-            this.sTenloaidouong.Name = "sTenloaidouong";
-            this.sTenloaidouong.ReadOnly = true;
-            this.sTenloaidouong.Width = 400;
             // 
             // iMadouong
             // 
@@ -542,6 +523,15 @@ namespace QLCF
             this.maLoaidouong.ReadOnly = true;
             this.maLoaidouong.Visible = false;
             // 
+            // tabPage5
+            // 
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(840, 452);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Thống kê doanh thu";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
             // FormAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -583,7 +573,6 @@ namespace QLCF
         private System.Windows.Forms.Button btnAddCategory;
         private System.Windows.Forms.DataGridView dataGridViewCategory;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnEditBeverage;

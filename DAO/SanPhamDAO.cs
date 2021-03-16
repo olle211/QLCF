@@ -22,7 +22,7 @@ namespace QLCF.DAO
         {
             List<cSanPham> list = new List<cSanPham>();
             DataTable data = new DataTable();
-            data = DataProvider.Instance.ExcuteQuery("Select * From tblSanpham");
+            data = DataProvider.Instance.ExcuteQuery("Select * From tblDouong");
             foreach(DataRow item in data.Rows)
             {
                 cSanPham sp = new cSanPham(item);

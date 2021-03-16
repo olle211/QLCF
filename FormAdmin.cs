@@ -79,164 +79,16 @@ namespace QLCF
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void btnDeleteBeverage_Click(object sender, EventArgs e)
         {
-            type = "delete";
-            if (empStatus == false)
-            {
-                deleteData();
-            }
-            else
-            {
-                MessageBox.Show("Không thể xóa nhân viên có trạng thái Đang làm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnEditCategory_Click(object sender, EventArgs e)
-        {
-            type = "edit";
-            FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
-            FormAddCategory.ShowDialog();
-            Show();
-            ReloadForm();
-        }
-
-        private void btnDeleteCategory_Click(object sender, EventArgs e)
-        {
-                MessageBox.Show("Không thể xóa được", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void btnEditBeverage_Click(object sender, EventArgs e)
-        {
-            type = "edit";
-            FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName);
-            FormAddBeverage.ShowDialog();
-            Show();
-            ReloadForm();
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            type = "edit";
-            FormAddEmployee FormAddEmployee = new FormAddEmployee(type, empId, empName, empPhone, empAddress, empStatus, empGender, empDoB, empIsAdmin);
-            FormAddEmployee.ShowDialog();
-            Show();
-            ReloadForm();
-        }
-
-        private void txtSearch_Leave(object sender, EventArgs e)
-        {
-            if (txtSearch.Text == "")
-            {
-                txtSearch.Text = "Tên nhân viên/Số điện thoại...";
-                txtSearch.ForeColor = Color.Silver;
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            type = "new";
-            FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
-            FormAddCategory.ShowDialog();
-            Show();
-            ReloadForm();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            type = "new";
-            FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName);
-            FormAddBeverage.ShowDialog();
-            Show();
-            ReloadForm();
-        }
-
-        private void dataGridViewNV_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                dataGridViewNV.CurrentRow.Selected = true;
-                btnDelete.Enabled = true;
-                btnEdit.Enabled = true;
-                btnAdd.Enabled = false;
-
-                empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
-                empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
-                empAddress = (dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
-                empPhone = (dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
-                empDoB = Convert.ToDateTime(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
-                if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nam"))
-                {
-                    empGender = true;
-
-                }
-                else if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nữ"))
-                {
-                    empGender = false;
-                }
-
-                if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Đang làm"))
-                {
-                    empStatus = true;
-                }
-                else if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Nghỉ việc"))
-                {
-                    empStatus = false;
-                }
-                if (dataGridViewNV.SelectedRows[0].Cells["isAdmin"].Value.Equals(true))
-                {
-                    empIsAdmin = true;
-                }
-                else
-                {
-                    empIsAdmin = false;
-
-                }
-            }
-        }
-        
-        private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                dataGridViewCategory.CurrentRow.Selected = true;
-                btnDeleteCategory.Enabled = true;
-                btnEditCategory.Enabled = true;
-                btnAddCategory.Enabled = false;
-
-                cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
-                cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
-            }
-        }
-        private void dataGridViewBeverage_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewBeverage.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-            {
-                dataGridViewBeverage.CurrentRow.Selected = true;
-                btnDeleteBeverage.Enabled = true;
-                btnEditBeverage.Enabled = true;
-                btnAddBeverage.Enabled = false;
-
-                bevId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMadouong"].FormattedValue);
-                bevName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTendouong"].FormattedValue.ToString());
-                bevAmount = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iSoluong"].FormattedValue);
-                bevPrice = float.Parse(dataGridViewBeverage.Rows[e.RowIndex].Cells["fDongia"].FormattedValue.ToString());
-                bevCateName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["Tenloaidouong"].FormattedValue.ToString());
-            }
-        }
-
-        public void deleteData()
-        {
-            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này? Dữ liệu sẽ không thể khôi phục.", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var connection = new SqlConnection(connectionString);
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa đồ uống này? Dữ liệu sẽ không thể khôi phục.", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                var connection = new SqlConnection(connectionString);
-                var command = new SqlCommand("deleteNV", connection);
+                SqlCommand command = new SqlCommand("deleteBeverage", connection);
                 command.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter id = command.Parameters.Add("iMaNV", SqlDbType.Int);
-                id.Value = empId;
-
+                SqlParameter categoryid = command.Parameters.Add("iMadouong", SqlDbType.Int);
+                categoryid.Value = bevId;
                 connection.Open();
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -245,5 +97,208 @@ namespace QLCF
                 ReloadForm();
             }
         }
+
+    private void btnDelete_Click(object sender, EventArgs e)
+    {
+        type = "delete";
+        if (empStatus == false)
+        {
+            deleteData();
+        }
+        else
+        {
+            MessageBox.Show("Không thể xóa nhân viên có trạng thái Đang làm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
+
+    private void btnEditCategory_Click(object sender, EventArgs e)
+    {
+        type = "edit";
+        FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
+        FormAddCategory.ShowDialog();
+        Show();
+        ReloadForm();
+    }
+
+    private void btnDeleteCategory_Click(object sender, EventArgs e)
+    {
+        var connection = new SqlConnection(connectionString);
+        SqlCommand command = new SqlCommand("checkContraintCateBeverage", connection);
+
+        SqlParameter id = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
+        id.Value = cateId;
+        var returnParameter = command.Parameters.Add("@ReturnVal", SqlDbType.Int);
+        returnParameter.Direction = ParameterDirection.ReturnValue;
+        command.CommandType = CommandType.StoredProcedure;
+
+        connection.Open();
+        command.ExecuteNonQuery();
+        int result = Int32.Parse(returnParameter.Value.ToString());
+        connection.Close();
+
+        if (result == 1)
+        {
+            MessageBox.Show("Không thể xóa loại đồ uống đang tồn tại đồ uống", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        else
+        {
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa loại đồ uống này? Dữ liệu sẽ không thể khôi phục.", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                SqlCommand command2 = new SqlCommand("deleteCategory", connection);
+
+                SqlParameter categoryid = command2.Parameters.Add("iMaloaidouong", SqlDbType.Int);
+                categoryid.Value = cateId;
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+
+                MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ReloadForm();
+            }
+        }
+
+    }
+
+    private void btnEditBeverage_Click(object sender, EventArgs e)
+    {
+        type = "edit";
+        FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName, bevCateId);
+        FormAddBeverage.ShowDialog();
+        Show();
+        ReloadForm();
+    }
+
+    private void btnEdit_Click(object sender, EventArgs e)
+    {
+        type = "edit";
+        FormAddEmployee FormAddEmployee = new FormAddEmployee(type, empId, empName, empPhone, empAddress, empStatus, empGender, empDoB, empIsAdmin);
+        FormAddEmployee.ShowDialog();
+        Show();
+        ReloadForm();
+    }
+
+    private void txtSearch_Leave(object sender, EventArgs e)
+    {
+        if (txtSearch.Text == "")
+        {
+            txtSearch.Text = "Tên nhân viên/Số điện thoại...";
+            txtSearch.ForeColor = Color.Silver;
+        }
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        type = "new";
+        FormAddCategory FormAddCategory = new FormAddCategory(type, cateId, cateName);
+        FormAddCategory.ShowDialog();
+        Show();
+        ReloadForm();
+    }
+
+    private void button9_Click(object sender, EventArgs e)
+    {
+        type = "new";
+        FormAddBeverage FormAddBeverage = new FormAddBeverage(type, bevId, bevName, bevPrice, bevAmount, bevCateName, bevCateId);
+        FormAddBeverage.ShowDialog();
+        Show();
+        ReloadForm();
+    }
+
+    private void dataGridViewNV_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+        {
+            dataGridViewNV.CurrentRow.Selected = true;
+            btnDelete.Enabled = true;
+            btnEdit.Enabled = true;
+            btnAdd.Enabled = false;
+
+            empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
+            empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
+            empAddress = (dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
+            empPhone = (dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
+            empDoB = Convert.ToDateTime(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
+            if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nam"))
+            {
+                empGender = true;
+
+            }
+            else if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nữ"))
+            {
+                empGender = false;
+            }
+
+            if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Đang làm"))
+            {
+                empStatus = true;
+            }
+            else if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Nghỉ việc"))
+            {
+                empStatus = false;
+            }
+            if (dataGridViewNV.SelectedRows[0].Cells["isAdmin"].Value.Equals(true))
+            {
+                empIsAdmin = true;
+            }
+            else
+            {
+                empIsAdmin = false;
+
+            }
+        }
+    }
+
+    private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+        {
+            dataGridViewCategory.CurrentRow.Selected = true;
+            btnDeleteCategory.Enabled = true;
+            btnEditCategory.Enabled = true;
+            btnAddCategory.Enabled = false;
+
+            cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
+            cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
+        }
+    }
+    private void dataGridViewBeverage_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (dataGridViewBeverage.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+        {
+            dataGridViewBeverage.CurrentRow.Selected = true;
+            btnDeleteBeverage.Enabled = true;
+            btnEditBeverage.Enabled = true;
+            btnAddBeverage.Enabled = false;
+
+            bevId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMadouong"].FormattedValue);
+            bevName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTendouong"].FormattedValue.ToString());
+            bevAmount = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iSoluong"].FormattedValue);
+            bevPrice = float.Parse(dataGridViewBeverage.Rows[e.RowIndex].Cells["fDongia"].FormattedValue.ToString());
+            bevCateName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["Tenloaidouong"].FormattedValue.ToString());
+            bevCateId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["maLoaidouong"].FormattedValue.ToString());
+        }
+    }
+
+    public void deleteData()
+    {
+        DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này? Dữ liệu sẽ không thể khôi phục.", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        if (dr == DialogResult.Yes)
+        {
+            var connection = new SqlConnection(connectionString);
+            var command = new SqlCommand("deleteNV", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            SqlParameter id = command.Parameters.Add("iMaNV", SqlDbType.Int);
+            id.Value = empId;
+
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
+
+            MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            ReloadForm();
+        }
+    }
+}
 }

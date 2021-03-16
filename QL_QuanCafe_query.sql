@@ -8,7 +8,7 @@ CREATE table tblNhanvien (
 	iMaNV int identity(1,1) NOT NULL,
 	sHoten nvarchar (50) not null,
 	sGioitinh nvarchar (10) not null,
-	iSDT int not null,
+	sSDT varchar (10) not null,
 	sDiachi nvarchar (50) not null,
 	dNgaysinh date,
 	sTrangthai nvarchar (20) null,
@@ -128,22 +128,13 @@ EXEC thanh_toan_HD @iSoHD , @sTrangthai;
 
 SELECT * FROM dbo.tblCT_Hoadon;
 
-
-
-
-
-
-
-
-
-
 /*tạo proc kiểm tra đăng nhập */
 
-CREATE proc LoginCheck 
+alter proc LoginCheck 
 @username varchar(10),
 @password varchar(10)
 as
-select sHoten, sSDT, isAdmin, sMatkhau
+select sHoten, sSDT, isAdmin, sMatkhau, iMaNV
 from tblNhanvien 
 where sSDT = @username and sMatkhau = @password
 
@@ -156,50 +147,32 @@ ALTER TABLE tblNhanvien
   ADD  iMaCV INT ;
   GO
 /*insert fake data */
-INSERT INTO tblNhanvien(sHoten, sGioitinh, iSDT, sDiachi, dNgaysinh, iMaCV, sTrangthai, isAdmin, sMatkhau)
-VALUES ( 'phuong', 'nam', '0912345677', 'dinh cong', '02-11-1998', 2, 'dang lam',0, 'admin100');
+INSERT INTO tblNhanvien(sHoten, sGioitinh, sSDT, sDiachi, dNgaysinh, sTrangthai, isAdmin, sMatkhau)
+VALUES ( N'Tài', 'Nam', '0987654321', N'Định Công', '02-11-1998', 'Đang làm',0, 'admin100');
 INSERT INTO tblNhanvien(sHoten, sGioitinh, iSDT, sDiachi, dNgaysinh, iMaCV, sTrangthai, isAdmin, sMatkhau)
 VALUES ( 'Đồng Duy Phương', 'nam', '0123', 'dinh cong', '02-11-1998', 2, 'dang lam',0, 'a');
 GO
 /*tạo proc thêm nhân viên */
-
-CREATE proc addNV
-@sHoten varchar (50),
-@sGioitinh nvarchar (10),
-@iSDT INT,
-
-alter proc addNV
-@sHoten varchar (50),
+create proc addNV
+@sHoten nvarchar (50),
 @sGioitinh nvarchar (10),
 @sSDT varchar(10),
-
-@sDiachi varchar(50),
+@sDiachi nvarchar(50),
 @dNgaysinh date,
 @status nvarchar (20),
-@iMaCV INT,
 @isAdmin bit,
 @password varchar (20)
 as
 	BEGIN
 		insert into tblNhanvien
-
-		values (@sHoten,@sGioitinh,@iSDT,@sDiachi,@dNgaysinh,@iMaCV, @status, @isAdmin, @password);
-	END
-
---drop proc addNV
-GO
-=======
 		values (@sHoten,@sGioitinh,@sSDT,@sDiachi,@dNgaysinh, @status, @isAdmin, @password);
 	END
-
 	drop proc addNV
 	
-
 /*check nhân viên tồn tại*/
 create proc checkEmployeeExist
 @sSDT varchar(10)
 as
-<<<<<<< HEAD
 select iSDT
 from tblNhanvien 
 where iSDT = @sSDT
@@ -211,7 +184,6 @@ GO
 create proc returnNV
 as 
 select iMaNV, sHoten, sGioitinh,iSDT, sDiachi, dNgaysinh, sTrangthai, isAdmin
-=======
 select sSDT
 from tblNhanvien 
 where sSDT = @sSDT
@@ -228,12 +200,10 @@ from tblNhanvien
 
 exec returnNV
 
-<<<<<<< HEAD
 INSERT dbo.tblLoaisanpham
         ( sTenloaiSP )
 VALUES  ( N'Cafe đen đá'  -- sTenloaiSP - nvarchar(20)
           )
-=======
 /*proc sửa nhân viên*/
 alter proc editNV 
 @iMaNV int,
@@ -301,6 +271,8 @@ DELETE
 from tblLoaidouong
 WHERE iMaloaidouong = @iMaloaidouong 
 
+exec deleteCategory 6
+
 alter view vvSolgDouongtheoLoai (maLoaidouong, tenLoaidouong, soluongdouong)
 as
 select tblLoaidouong.iMaloaidouong, tblLoaidouong.sTenloaidouong, count(tblDouong.iMadouong)
@@ -311,9 +283,24 @@ group by tblLoaidouong.iMaloaidouong, tblLoaidouong.sTenloaidouong
 select * from vvSolgDouongtheoLoai
 
 /* kiểm tra ràng buộc loại đồ uống - đồ uống trước khi xóa */
+DECLARE @returnvalue int;
+EXEC @returnvalue = checkContraintCateBeverage @iMaloaidouong = 1
+select @returnvalue
+
 create proc checkContraintCateBeverage
+@iMaloaidouong int
 as
-select 
+IF EXISTS (SELECT top(1) * FROM tblDouong WHERE iMaloaidouong = @iMaloaidouong) 
+--true
+BEGIN
+   return 1 
+END
+--false
+ELSE
+BEGIN
+    return 0
+END 
+exec checkContraintCateBeverage 1
 
 /*tạo proc trả dữ liệu của bảng loại đồ uống */
 create proc returnCategory
@@ -357,6 +344,8 @@ DELETE
 from tblDouong
 WHERE iMadouong = @iMadouong
 
+exec deleteBeverage 16
+
 /*tạo proc trả dữ liệu của bảng đồ uống */
 alter proc returnBeverage
 as 
@@ -372,4 +361,3 @@ as
 select sTendouong
 from tblDouong
 where sTendouong = @beverageNm
->>>>>>> 6694b717d2d073eafc76df2e4fa23e1acea80135
