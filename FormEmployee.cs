@@ -15,24 +15,23 @@ namespace QLCF
 {
     public partial class FormEmployee : Form
     {
-        string username, maNv;
-        string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
+        
+        //string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
 
-        public FormEmployee(string _username, string _maNV)
+        public FormEmployee()
         {
             InitializeComponent();
-            username = _username;
-            maNv = _maNV;
+            
         }
 
         private void FormEmployee_Load(object sender, EventArgs e)
         {
-            lblWelcome.Text = "Xin chào " + username + " có mã NV là: " + maNv;
+            lblWelcome.Text = "Xin chào " + Program.TenNVLogin + " có mã NV là: " + Program.MaNVLogin; ;
         }
 
         private void btnTaoHoaDon_Click(object sender, EventArgs e)
         {
-            fTaoHoaDon f = new fTaoHoaDon(username, maNv);
+            fTaoHoaDon f = new fTaoHoaDon();
             f.ShowDialog();
         }
 

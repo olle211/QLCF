@@ -39,7 +39,7 @@ namespace QLCF
                 while (dataReader.Read())
                 {
                     isAdmin = dataReader.GetBoolean(dataReader.GetOrdinal("isAdmin"));
-                    username = dataReader.GetString(dataReader.GetOrdinal("iSDT")).ToString();
+                    username = dataReader.GetString(dataReader.GetOrdinal("sSDT")).ToString();
                     password = dataReader.GetString(dataReader.GetOrdinal("sMatkhau"));
                     name = dataReader.GetString(dataReader.GetOrdinal("sHoten"));
                     maNV = dataReader.GetInt32(dataReader.GetOrdinal("iMaNV")).ToString();

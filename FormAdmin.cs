@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using QLCF.DTO;
+using QLCF.DAO;
 
 namespace QLCF
 {
@@ -98,7 +100,63 @@ namespace QLCF
             }
         }
 
-    private void btnDelete_Click(object sender, EventArgs e)
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+            
+            
+           
+        }
+
+        private void btnXemThongKe_Click(object sender, EventArgs e)
+        {
+            listViewHD.Items.Clear();
+            string cbbValue = comboBox1.SelectedItem.ToString();
+            if (cbbValue != null)
+            {
+                List<cBill> listbill = new List<cBill>();
+                int ngay = (int)numericNgay.Value;
+                int thang = (int)numericThang.Value;
+                int nam = (int)numericNam.Value;
+                float tong = 0;
+
+                if (cbbValue == "Ngày")
+                {
+                    numericThang.Enabled = true;
+                    numericNgay.Enabled = true;
+                    numericNam.Enabled = true;
+                    listbill = BillDAO.Instance.Thongke_HD(ngay, thang, nam);
+                }
+                if (cbbValue == "Tháng")
+                {
+                    numericNgay.Enabled=false;
+                    listbill = BillDAO.Instance.Thongke_HD(null, thang, nam);
+                }
+                if (cbbValue == "Năm")
+                {
+                    numericNgay.Enabled = false;
+                    numericThang.Enabled = false;
+                    listbill = BillDAO.Instance.Thongke_HD(null, null, nam);
+                }
+                if (cbbValue == "Tất cả")
+                {
+                    listbill = BillDAO.Instance.listBill();
+                }
+                foreach (cBill bill in listbill)
+                {
+                    ListViewItem item = new ListViewItem(bill.ISoHD.ToString());
+                    item.SubItems.Add(bill.DNgaylap.Value.ToString("dd-MM-yyyy"));
+                    item.SubItems.Add(bill.FTongtien.ToString());
+                    tong = (float)(tong + bill.FTongtien);
+                    listViewHD.Items.Add(item);
+                }
+                lblTongTien.Text = tong.ToString();
+            }
+            
+            
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
     {
         type = "delete";
         if (empStatus == false)
@@ -207,77 +265,89 @@ namespace QLCF
 
     private void dataGridViewNV_CellClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-        {
-            dataGridViewNV.CurrentRow.Selected = true;
-            btnDelete.Enabled = true;
-            btnEdit.Enabled = true;
-            btnAdd.Enabled = false;
+            if (e.RowIndex != -1)
+            {
+                if (dataGridViewNV.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    dataGridViewNV.CurrentRow.Selected = true;
+                    btnDelete.Enabled = true;
+                    btnEdit.Enabled = true;
+                    btnAdd.Enabled = false;
 
-            empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
-            empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
-            empAddress = (dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
-            empPhone = (dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
-            empDoB = Convert.ToDateTime(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
-            if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nam"))
-            {
-                empGender = true;
+                    empId = Convert.ToInt32(dataGridViewNV.Rows[e.RowIndex].Cells["iMaNV"].FormattedValue);
+                    empName = (dataGridViewNV.Rows[e.RowIndex].Cells["sHoten"].FormattedValue.ToString());
+                    empAddress = (dataGridViewNV.Rows[e.RowIndex].Cells["sDiachi"].FormattedValue.ToString());
+                    empPhone = (dataGridViewNV.Rows[e.RowIndex].Cells["sSDT"].FormattedValue.ToString());
+                    empDoB = Convert.ToDateTime(dataGridViewNV.Rows[e.RowIndex].Cells["dNgaysinh"].FormattedValue.ToString());
+                    if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nam"))
+                    {
+                        empGender = true;
 
-            }
-            else if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nữ"))
-            {
-                empGender = false;
-            }
+                    }
+                    else if (dataGridViewNV.SelectedRows[0].Cells["sGioitinh"].Value.Equals("Nữ"))
+                    {
+                        empGender = false;
+                    }
 
-            if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Đang làm"))
-            {
-                empStatus = true;
-            }
-            else if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Nghỉ việc"))
-            {
-                empStatus = false;
-            }
-            if (dataGridViewNV.SelectedRows[0].Cells["isAdmin"].Value.Equals(true))
-            {
-                empIsAdmin = true;
-            }
-            else
-            {
-                empIsAdmin = false;
+                    if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Đang làm"))
+                    {
+                        empStatus = true;
+                    }
+                    else if (dataGridViewNV.SelectedRows[0].Cells["sTrangthai"].Value.Equals("Nghỉ việc"))
+                    {
+                        empStatus = false;
+                    }
+                    if (dataGridViewNV.SelectedRows[0].Cells["isAdmin"].Value.Equals(true))
+                    {
+                        empIsAdmin = true;
+                    }
+                    else
+                    {
+                        empIsAdmin = false;
 
+                    }
+                }
             }
-        }
+        
     }
 
     private void dataGridViewCategory_CellClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-        {
-            dataGridViewCategory.CurrentRow.Selected = true;
-            btnDeleteCategory.Enabled = true;
-            btnEditCategory.Enabled = true;
-            btnAddCategory.Enabled = false;
+            if (e.RowIndex != -1)
+            {
+                if (dataGridViewCategory.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    dataGridViewCategory.CurrentRow.Selected = true;
+                    btnDeleteCategory.Enabled = true;
+                    btnEditCategory.Enabled = true;
+                    btnAddCategory.Enabled = false;
 
-            cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
-            cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
-        }
+                    cateId = Convert.ToInt32(dataGridViewCategory.Rows[e.RowIndex].Cells["iMaloaidouong"].FormattedValue);
+                    cateName = (dataGridViewCategory.Rows[e.RowIndex].Cells["sTenloaidouong"].FormattedValue.ToString());
+                }
+            }
+        
     }
     private void dataGridViewBeverage_CellClick(object sender, DataGridViewCellEventArgs e)
     {
-        if (dataGridViewBeverage.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-        {
-            dataGridViewBeverage.CurrentRow.Selected = true;
-            btnDeleteBeverage.Enabled = true;
-            btnEditBeverage.Enabled = true;
-            btnAddBeverage.Enabled = false;
+            if (e.RowIndex != -1)
+            {
+                if (dataGridViewBeverage.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
+                {
+                    dataGridViewBeverage.CurrentRow.Selected = true;
+                    btnDeleteBeverage.Enabled = true;
+                    btnEditBeverage.Enabled = true;
+                    btnAddBeverage.Enabled = false;
 
-            bevId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMadouong"].FormattedValue);
-            bevName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTendouong"].FormattedValue.ToString());
-            bevAmount = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iSoluong"].FormattedValue);
-            bevPrice = float.Parse(dataGridViewBeverage.Rows[e.RowIndex].Cells["fDongia"].FormattedValue.ToString());
-            bevCateName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["Tenloaidouong"].FormattedValue.ToString());
-            bevCateId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["maLoaidouong"].FormattedValue.ToString());
-        }
+                    bevId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMaSP"].FormattedValue);
+                    bevName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTenSP"].FormattedValue.ToString());
+                    bevAmount = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iSoluong"].FormattedValue);
+                    bevPrice = float.Parse(dataGridViewBeverage.Rows[e.RowIndex].Cells["fDongia"].FormattedValue.ToString());
+                    bevCateName = (dataGridViewBeverage.Rows[e.RowIndex].Cells["sTenloaiSP"].FormattedValue.ToString());
+                    bevCateId = Convert.ToInt32(dataGridViewBeverage.Rows[e.RowIndex].Cells["iMaloaiSP"].FormattedValue.ToString());
+                }
+            }
+        
     }
 
     public void deleteData()

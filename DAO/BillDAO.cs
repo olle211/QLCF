@@ -86,5 +86,60 @@ namespace QLCF.DAO
             }
             
         }
+
+        public List<cBill> Thongke_HD(int? ngay, int? thang, int? nam) 
+        {
+            List<cBill> lsbillThongKe = new List<cBill>();
+            List<cBill> lsbill = new List<cBill>();
+            lsbill = listBill();
+
+            if (ngay == null)
+            {
+                foreach(cBill bill in lsbill)
+                {
+                    if(bill.DNgaylap.Value.Month==thang && bill.DNgaylap.Value.Year == nam)
+                    {
+                        if(bill.STrangthai=="Đã thanh toán")
+                        {
+                            lsbillThongKe.Add(bill);
+                        }
+                        
+
+                    }
+                }
+                return lsbillThongKe;
+            }
+            if(ngay==null && thang == null)
+            {
+                foreach (cBill bill in lsbill)
+                {
+                    if (bill.DNgaylap.Value.Year == nam)
+                    {
+                        if (bill.STrangthai == "Đã thanh toán")
+                        {
+                            lsbillThongKe.Add(bill);
+                        }
+                    }
+                }
+                return lsbillThongKe;
+            }
+
+            foreach (cBill bill in lsbill)
+            {
+                if (bill.DNgaylap.Value.Day==ngay && bill.DNgaylap.Value.Month == thang && bill.DNgaylap.Value.Year == nam)
+                {
+                   if(bill.STrangthai=="Đã thanh toán")
+                        {
+                            lsbillThongKe.Add(bill);
+                        }
+                }
+            }
+
+
+            return lsbillThongKe;
+
+
+            
+        }
     }
 }

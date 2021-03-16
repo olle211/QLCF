@@ -54,7 +54,7 @@ namespace QLCF.DTO
             this.IMaNV = (int)row["iMaNV"];
             this.SHoTen = row["sHoten"].ToString();
             this.SGioitinh = row["sGioitinh"].ToString();
-            this.ISDT = Convert.ToInt32(row["iSDT"]);
+            this.ISDT = Convert.ToInt32(row["sSDT"]);
             this.SDiachi = row["sDiachi"].ToString();
             this.DNgaySinh = (DateTime?)row["dNgaysinh"];
             this.STrangthai = row["sTrangthai"].ToString();

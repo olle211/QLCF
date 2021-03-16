@@ -104,7 +104,7 @@ namespace QLCF
             // lblMaNV
             // 
             this.lblMaNV.AutoSize = true;
-            this.lblMaNV.Location = new System.Drawing.Point(251, 4);
+            this.lblMaNV.Location = new System.Drawing.Point(252, 4);
             this.lblMaNV.Name = "lblMaNV";
             this.lblMaNV.Size = new System.Drawing.Size(0, 13);
             this.lblMaNV.TabIndex = 3;
@@ -112,7 +112,7 @@ namespace QLCF
             // lblMaNV1
             // 
             this.lblMaNV1.AutoSize = true;
-            this.lblMaNV1.Location = new System.Drawing.Point(204, 4);
+            this.lblMaNV1.Location = new System.Drawing.Point(200, 4);
             this.lblMaNV1.Name = "lblMaNV1";
             this.lblMaNV1.Size = new System.Drawing.Size(46, 13);
             this.lblMaNV1.TabIndex = 2;
@@ -129,7 +129,7 @@ namespace QLCF
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 4);
+            this.label1.Location = new System.Drawing.Point(4, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 0;

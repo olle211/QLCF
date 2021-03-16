@@ -54,8 +54,6 @@ namespace QLCF
             this.btnDeleteCategory = new System.Windows.Forms.Button();
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.dataGridViewCategory = new System.Windows.Forms.DataGridView();
-            this.iMaloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btnEditBeverage = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -63,13 +61,29 @@ namespace QLCF
             this.btnDeleteBeverage = new System.Windows.Forms.Button();
             this.btnAddBeverage = new System.Windows.Forms.Button();
             this.dataGridViewBeverage = new System.Windows.Forms.DataGridView();
-            this.iMadouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sTendouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.iMaSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTenSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iSoluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fDongia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.maLoaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.sTenloaiSP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iMaloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTenloaidouong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblNgayLapHD = new System.Windows.Forms.Label();
+            this.llblThangLapHD = new System.Windows.Forms.Label();
+            this.lblNamLapHD = new System.Windows.Forms.Label();
+            this.numericNgay = new System.Windows.Forms.NumericUpDown();
+            this.numericThang = new System.Windows.Forms.NumericUpDown();
+            this.numericNam = new System.Windows.Forms.NumericUpDown();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblTongTien = new System.Windows.Forms.Label();
+            this.listViewHD = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnXemThongKe = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNV)).BeginInit();
@@ -77,6 +91,10 @@ namespace QLCF
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCategory)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBeverage)).BeginInit();
+            this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNgay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericThang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNam)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWelcome
@@ -354,27 +372,6 @@ namespace QLCF
             this.dataGridViewCategory.TabIndex = 53;
             this.dataGridViewCategory.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCategory_CellClick);
             // 
-            // iMaloaidouong
-            // 
-            this.iMaloaidouong.DataPropertyName = "iMaloaidouong";
-            this.iMaloaidouong.DividerWidth = 1;
-            this.iMaloaidouong.FillWeight = 193.1972F;
-            this.iMaloaidouong.HeaderText = "Mã loại đồ uống";
-            this.iMaloaidouong.Name = "iMaloaidouong";
-            this.iMaloaidouong.ReadOnly = true;
-            this.iMaloaidouong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.iMaloaidouong.Width = 400;
-            // 
-            // sTenloaidouong
-            // 
-            this.sTenloaidouong.DataPropertyName = "sTenloaidouong";
-            this.sTenloaidouong.DividerWidth = 1;
-            this.sTenloaidouong.FillWeight = 6.802719F;
-            this.sTenloaidouong.HeaderText = "Tên loại đồ uống";
-            this.sTenloaidouong.Name = "sTenloaidouong";
-            this.sTenloaidouong.ReadOnly = true;
-            this.sTenloaidouong.Width = 400;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.btnEditBeverage);
@@ -456,12 +453,11 @@ namespace QLCF
             this.dataGridViewBeverage.AllowUserToResizeRows = false;
             this.dataGridViewBeverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBeverage.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iMadouong,
-            this.sTendouong,
+            this.iMaSP,
+            this.sTenSP,
             this.iSoluong,
             this.fDongia,
-            this.Tenloaidouong,
-            this.maLoaidouong});
+            this.sTenloaiSP});
             this.dataGridViewBeverage.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewBeverage.Name = "dataGridViewBeverage";
             this.dataGridViewBeverage.ReadOnly = true;
@@ -469,24 +465,45 @@ namespace QLCF
             this.dataGridViewBeverage.TabIndex = 60;
             this.dataGridViewBeverage.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewBeverage_CellClick);
             // 
-            // iMadouong
+            // tabPage5
             // 
-            this.iMadouong.DataPropertyName = "iMadouong";
-            this.iMadouong.FillWeight = 161.0096F;
-            this.iMadouong.HeaderText = "Mã đồ uống";
-            this.iMadouong.Name = "iMadouong";
-            this.iMadouong.ReadOnly = true;
-            this.iMadouong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.iMadouong.Width = 150;
+            this.tabPage5.Controls.Add(this.btnXemThongKe);
+            this.tabPage5.Controls.Add(this.listViewHD);
+            this.tabPage5.Controls.Add(this.lblTongTien);
+            this.tabPage5.Controls.Add(this.label2);
+            this.tabPage5.Controls.Add(this.label1);
+            this.tabPage5.Controls.Add(this.comboBox1);
+            this.tabPage5.Controls.Add(this.numericNam);
+            this.tabPage5.Controls.Add(this.numericThang);
+            this.tabPage5.Controls.Add(this.numericNgay);
+            this.tabPage5.Controls.Add(this.lblNamLapHD);
+            this.tabPage5.Controls.Add(this.llblThangLapHD);
+            this.tabPage5.Controls.Add(this.lblNgayLapHD);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(840, 452);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Thống kê doanh thu";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // sTendouong
+            // iMaSP
             // 
-            this.sTendouong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.sTendouong.DataPropertyName = "sTendouong";
-            this.sTendouong.FillWeight = 7.187927F;
-            this.sTendouong.HeaderText = "Tên đồ uống";
-            this.sTendouong.Name = "sTendouong";
-            this.sTendouong.ReadOnly = true;
+            this.iMaSP.DataPropertyName = "iMaSP";
+            this.iMaSP.FillWeight = 161.0096F;
+            this.iMaSP.HeaderText = "Mã đồ uống";
+            this.iMaSP.Name = "iMaSP";
+            this.iMaSP.ReadOnly = true;
+            this.iMaSP.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.iMaSP.Width = 150;
+            // 
+            // sTenSP
+            // 
+            this.sTenSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sTenSP.DataPropertyName = "sTenSP";
+            this.sTenSP.FillWeight = 7.187927F;
+            this.sTenSP.HeaderText = "Tên đồ uống";
+            this.sTenSP.Name = "sTenSP";
+            this.sTenSP.ReadOnly = true;
             // 
             // iSoluong
             // 
@@ -506,31 +523,206 @@ namespace QLCF
             this.fDongia.Name = "fDongia";
             this.fDongia.ReadOnly = true;
             // 
-            // Tenloaidouong
+            // sTenloaiSP
             // 
-            this.Tenloaidouong.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Tenloaidouong.DataPropertyName = "sTenloaidouong";
-            this.Tenloaidouong.FillWeight = 7.187927F;
-            this.Tenloaidouong.HeaderText = "Loại đồ uống";
-            this.Tenloaidouong.Name = "Tenloaidouong";
-            this.Tenloaidouong.ReadOnly = true;
+            this.sTenloaiSP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.sTenloaiSP.DataPropertyName = "sTenloaiSP";
+            this.sTenloaiSP.FillWeight = 7.187927F;
+            this.sTenloaiSP.HeaderText = "Loại đồ uống";
+            this.sTenloaiSP.Name = "sTenloaiSP";
+            this.sTenloaiSP.ReadOnly = true;
             // 
-            // maLoaidouong
+            // iMaloaidouong
             // 
-            this.maLoaidouong.DataPropertyName = "iMaloaidouong";
-            this.maLoaidouong.HeaderText = "Column1";
-            this.maLoaidouong.Name = "maLoaidouong";
-            this.maLoaidouong.ReadOnly = true;
-            this.maLoaidouong.Visible = false;
+            this.iMaloaidouong.DataPropertyName = "iMaloaiSP";
+            this.iMaloaidouong.DividerWidth = 1;
+            this.iMaloaidouong.FillWeight = 193.1972F;
+            this.iMaloaidouong.HeaderText = "Mã loại đồ uống";
+            this.iMaloaidouong.Name = "iMaloaidouong";
+            this.iMaloaidouong.ReadOnly = true;
+            this.iMaloaidouong.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.iMaloaidouong.Width = 400;
             // 
-            // tabPage5
+            // sTenloaidouong
             // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(840, 452);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Thống kê doanh thu";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.sTenloaidouong.DataPropertyName = "sTenloaiSP";
+            this.sTenloaidouong.DividerWidth = 1;
+            this.sTenloaidouong.FillWeight = 6.802719F;
+            this.sTenloaidouong.HeaderText = "Tên loại đồ uống";
+            this.sTenloaidouong.Name = "sTenloaidouong";
+            this.sTenloaidouong.ReadOnly = true;
+            this.sTenloaidouong.Width = 400;
+            // 
+            // lblNgayLapHD
+            // 
+            this.lblNgayLapHD.AutoSize = true;
+            this.lblNgayLapHD.Location = new System.Drawing.Point(214, 47);
+            this.lblNgayLapHD.Name = "lblNgayLapHD";
+            this.lblNgayLapHD.Size = new System.Drawing.Size(35, 13);
+            this.lblNgayLapHD.TabIndex = 0;
+            this.lblNgayLapHD.Text = "Ngày:";
+            // 
+            // llblThangLapHD
+            // 
+            this.llblThangLapHD.AutoSize = true;
+            this.llblThangLapHD.Location = new System.Drawing.Point(297, 47);
+            this.llblThangLapHD.Name = "llblThangLapHD";
+            this.llblThangLapHD.Size = new System.Drawing.Size(41, 13);
+            this.llblThangLapHD.TabIndex = 1;
+            this.llblThangLapHD.Text = "Tháng:";
+            // 
+            // lblNamLapHD
+            // 
+            this.lblNamLapHD.AutoSize = true;
+            this.lblNamLapHD.Location = new System.Drawing.Point(392, 47);
+            this.lblNamLapHD.Name = "lblNamLapHD";
+            this.lblNamLapHD.Size = new System.Drawing.Size(32, 13);
+            this.lblNamLapHD.TabIndex = 2;
+            this.lblNamLapHD.Text = "Năm:";
+            // 
+            // numericNgay
+            // 
+            this.numericNgay.Location = new System.Drawing.Point(248, 43);
+            this.numericNgay.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.numericNgay.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericNgay.Name = "numericNgay";
+            this.numericNgay.Size = new System.Drawing.Size(36, 20);
+            this.numericNgay.TabIndex = 3;
+            this.numericNgay.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericThang
+            // 
+            this.numericThang.Location = new System.Drawing.Point(339, 43);
+            this.numericThang.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.numericThang.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericThang.Name = "numericThang";
+            this.numericThang.Size = new System.Drawing.Size(36, 20);
+            this.numericThang.TabIndex = 4;
+            this.numericThang.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericNam
+            // 
+            this.numericNam.Location = new System.Drawing.Point(425, 43);
+            this.numericNam.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.numericNam.Minimum = new decimal(new int[] {
+            2020,
+            0,
+            0,
+            0});
+            this.numericNam.Name = "numericNam";
+            this.numericNam.Size = new System.Drawing.Size(54, 20);
+            this.numericNam.TabIndex = 5;
+            this.numericNam.Value = new decimal(new int[] {
+            2020,
+            0,
+            0,
+            0});
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Ngày",
+            "Tháng",
+            "Năm",
+            "Tất cả"});
+            this.comboBox1.Location = new System.Drawing.Point(300, 15);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 6;
+            this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(259, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Theo ";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(301, 406);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(55, 13);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tổng tiền:";
+            // 
+            // lblTongTien
+            // 
+            this.lblTongTien.AutoSize = true;
+            this.lblTongTien.Location = new System.Drawing.Point(358, 406);
+            this.lblTongTien.Name = "lblTongTien";
+            this.lblTongTien.Size = new System.Drawing.Size(63, 13);
+            this.lblTongTien.TabIndex = 10;
+            this.lblTongTien.Text = "lblTongTien";
+            // 
+            // listViewHD
+            // 
+            this.listViewHD.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+            this.listViewHD.HideSelection = false;
+            this.listViewHD.Location = new System.Drawing.Point(248, 98);
+            this.listViewHD.Name = "listViewHD";
+            this.listViewHD.Size = new System.Drawing.Size(233, 296);
+            this.listViewHD.TabIndex = 11;
+            this.listViewHD.UseCompatibleStateImageBehavior = false;
+            this.listViewHD.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Số HD";
+            this.columnHeader1.Width = 50;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Ngày lập";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Tổng tiền";
+            // 
+            // btnXemThongKe
+            // 
+            this.btnXemThongKe.Location = new System.Drawing.Point(315, 69);
+            this.btnXemThongKe.Name = "btnXemThongKe";
+            this.btnXemThongKe.Size = new System.Drawing.Size(75, 23);
+            this.btnXemThongKe.TabIndex = 12;
+            this.btnXemThongKe.Text = "Xem";
+            this.btnXemThongKe.UseVisualStyleBackColor = true;
+            this.btnXemThongKe.Click += new System.EventHandler(this.btnXemThongKe_Click);
             // 
             // FormAdmin
             // 
@@ -552,6 +744,11 @@ namespace QLCF
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBeverage)).EndInit();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNgay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericThang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNam)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -593,11 +790,25 @@ namespace QLCF
         private System.Windows.Forms.Button btnEditCategory;
         private System.Windows.Forms.DataGridViewTextBoxColumn iMaloaidouong;
         private System.Windows.Forms.DataGridViewTextBoxColumn sTenloaidouong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iMadouong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sTendouong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iMaSP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTenSP;
         private System.Windows.Forms.DataGridViewTextBoxColumn iSoluong;
         private System.Windows.Forms.DataGridViewTextBoxColumn fDongia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tenloaidouong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn maLoaidouong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTenloaiSP;
+        private System.Windows.Forms.Label lblNamLapHD;
+        private System.Windows.Forms.Label llblThangLapHD;
+        private System.Windows.Forms.Label lblNgayLapHD;
+        private System.Windows.Forms.ListView listViewHD;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Label lblTongTien;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.NumericUpDown numericNam;
+        private System.Windows.Forms.NumericUpDown numericThang;
+        private System.Windows.Forms.NumericUpDown numericNgay;
+        private System.Windows.Forms.Button btnXemThongKe;
     }
 }

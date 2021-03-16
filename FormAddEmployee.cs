@@ -130,7 +130,8 @@ namespace QLCF
             workingSTT.Value = status;
             SqlParameter isAdmin = command.Parameters.Add("isAdmin", SqlDbType.Bit);
             isAdmin.Value = isadmin;
-
+            SqlParameter iMaCV = command.Parameters.Add("@iMaCV", SqlDbType.Int);
+            iMaCV.Value = 1;
             connection.Open();
             command.ExecuteNonQuery();
             connection.Close();

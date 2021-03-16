@@ -17,17 +17,19 @@ namespace QLCF.DTO
             this.iMaban = (int)row["iMaban"];
             this.sTrangthai = row["sTrangthai"].ToString();
             this.dNgaylap = (DateTime?)row["dNgaylap"];
+            this.fTongtien = (float)Convert.ToDouble(row["fTongtien".ToString()]);
             
         }
-        public cBill(int? iSoHD, int iMaNV, String sTrangthai, DateTime? dNgaylap)
+        public cBill(int? iSoHD, int iMaNV, String sTrangthai, DateTime? dNgaylap )
         {
             this.ISoHD = iSoHD;
             this.IMaNV = iMaNV;
             this.IMaban = iMaban;
             this.STrangthai = sTrangthai;
             this.DNgaylap = dNgaylap;
+            
         }
-        private float fTongtien=0;
+        private float fTongtien;
         private DateTime? dNgaylap;
         private string sTrangthai;
         private int iMaban;

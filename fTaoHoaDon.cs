@@ -19,11 +19,11 @@ namespace QLCF
         int iSoHD=-1;//ma HD moi dc tao
 
 
-        public fTaoHoaDon(string username, string maNV)
+        public fTaoHoaDon()
         {
             InitializeComponent();
-            lblMaNV.Text = username;               //ten NV lap hoa don
-            lblNVLapHD.Text = maNV;           //Ma NV lap hoa don
+            lblMaNV.Text = Program.MaNVLogin;               //ten NV lap hoa don
+            lblNVLapHD.Text =Program.TenNVLogin;           //Ma NV lap hoa don
             listSPoder = new List<cSanPhamOder>();          //Khoi tao ds sp kh oder
             getDSSanPham();
             
@@ -117,7 +117,8 @@ namespace QLCF
         {
 
             TaoHD();
-            MessageBox.Show("Đã tạo thành công hóa đơn!");
+            
+
         }
 
 
@@ -146,7 +147,7 @@ namespace QLCF
                 BillinforDAO.Instance.AddBillInfor(bif);// thêm ct_hd vào database
                 SanPhamDAO.Instance.updateSLSP(listSPoder);// update lai so luong san pham con lai
                 BillDAO.Instance.setTongTienHD(iSoHD); //set tong tien HD cho HD vua tao
-
+                MessageBox.Show("Đã tạo thành công hóa đơn!");
 
                 //reset lai ds san pham oder va cap nhat lai danh sach san pham con lai
                 dgvHoaDon.DataSource = null;
@@ -234,6 +235,10 @@ namespace QLCF
         {
             TaoHD();
             BillDAO.Instance.ThanhToanHD(iSoHD);
+            String reportFilter = String.Format("{0} = {1}", "{tblCT_HoaDon.iSoHD}", iSoHD);
+            rpHoaDon rp = new rpHoaDon();
+            rp.Loadrp(reportFilter);
+            rp.ShowDialog();
         }
     }
 }
