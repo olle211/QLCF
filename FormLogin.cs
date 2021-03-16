@@ -16,7 +16,8 @@ namespace QLCF
     {
         string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
         Boolean isAdmin;
-        string name, username, password;
+        string name, username, password, maNV;
+
         public FormLogin()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace QLCF
                     username = dataReader.GetString(dataReader.GetOrdinal("iSDT")).ToString();
                     password = dataReader.GetString(dataReader.GetOrdinal("sMatkhau"));
                     name = dataReader.GetString(dataReader.GetOrdinal("sHoten"));
+                    maNV = dataReader.GetInt32(dataReader.GetOrdinal("iMaNV")).ToString();
                     Program.MaNVLogin = dataReader["iMaNV"].ToString();
                     Program.TenNVLogin = dataReader["sHoTen"].ToString();
                     Program.isAdmin = dataReader.GetBoolean(dataReader.GetOrdinal("isAdmin"));
@@ -60,11 +62,9 @@ namespace QLCF
                     }
                     else
                     {
-                       
+                        //FormEmployee FormEmployee = new FormEmployee(name, maNV);
                         FormEmployee FormEmployee = new FormEmployee();
                         Hide();
-                        
-
                         FormEmployee.ShowDialog();
                         Show();
                     }

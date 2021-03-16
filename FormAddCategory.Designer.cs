@@ -82,6 +82,7 @@ namespace QLCF
             this.txtHoten.Name = "txtHoten";
             this.txtHoten.Size = new System.Drawing.Size(150, 20);
             this.txtHoten.TabIndex = 54;
+            this.txtHoten.Validating += new System.ComponentModel.CancelEventHandler(this.txtHoten_Validating);
             // 
             // label4
             // 

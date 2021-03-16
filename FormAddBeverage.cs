@@ -45,10 +45,11 @@ namespace QLCF
             }
             connection.Close();
         }
-        public FormAddBeverage(string type, int bevId, string bevName, float bevPrice, int bevAmount, string bevCateName)
+        public FormAddBeverage(string type, int bevId, string bevName, float bevPrice, int bevAmount, string bevCateName, int bevCateId)
         {
             InitializeComponent();
             bevid = bevId;
+            categoryId = bevCateId;
             string typeForm = type;
             if (typeForm == "new")
             {
@@ -100,8 +101,8 @@ namespace QLCF
             donGia.Value = txtPrice.Text.Trim();
             SqlParameter soLg = command.Parameters.Add("iSoluong", SqlDbType.Int);
             soLg.Value = txtAmount.Text.Trim();
-            SqlParameter cateid = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
-            cateid.Value = categoryId;
+            SqlParameter category = command.Parameters.Add("iMaloaidouong", SqlDbType.Int);
+            category.Value = categoryId;
 
             connection.Open();
             command.ExecuteNonQuery();
@@ -228,7 +229,7 @@ namespace QLCF
         }
         private void txtCategory_Validating(object sender, CancelEventArgs e)
         {
-            if (comboBoxCategory.SelectedIndex != -1)
+            if (comboBoxCategory.SelectedIndex == -1)
             {
                 Category selectedItem = comboBoxCategory.SelectedItem as Category;
                 if (selectedItem == null)

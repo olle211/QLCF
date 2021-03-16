@@ -27,9 +27,9 @@ namespace QLCF.DTO
         }
         public cSanPham(DataRow row)
         {
-            this.iMaSP = (int)row["iMaSP"];
-            this.IMaloaisp = (int)row["iMaloaiSP"];
-            this.sTenSP = row["sTenSP"].ToString();
+            this.iMaSP = (int)row["iMadouong"];
+            this.IMaloaisp = (int)row["iMaloaidouong"];
+            this.sTenSP = row["sTendouong"].ToString();
             this.fDongia = (float)Convert.ToDouble(row["fDongia"].ToString());
             this.iSoluong = (int)row["iSoluong"];
         }

@@ -242,6 +242,7 @@ namespace QLCF
                 status = ((RadioButton)sender).Text;
         }
 
+
         private void txtHoten_Validating(object sender, CancelEventArgs e)
         {
             hoten = txtHoten.Text.Trim();

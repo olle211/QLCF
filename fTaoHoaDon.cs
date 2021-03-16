@@ -19,11 +19,11 @@ namespace QLCF
         int iSoHD=-1;//ma HD moi dc tao
 
 
-        public fTaoHoaDon()
+        public fTaoHoaDon(string username, string maNV)
         {
             InitializeComponent();
-            lblMaNV.Text = Program.MaNVLogin;               //ten NV lap hoa don
-            lblNVLapHD.Text = Program.TenNVLogin;           //Ma NV lap hoa don
+            lblMaNV.Text = username;               //ten NV lap hoa don
+            lblNVLapHD.Text = maNV;           //Ma NV lap hoa don
             listSPoder = new List<cSanPhamOder>();          //Khoi tao ds sp kh oder
             getDSSanPham();
             

@@ -51,7 +51,6 @@ namespace QLCF
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            //this.btnCancel = new System.Windows.Forms.Button();
             this.errorHoten = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorAddress = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorSDT = new System.Windows.Forms.ErrorProvider(this.components);
@@ -60,6 +59,7 @@ namespace QLCF
             this.errorIsAdmin = new System.Windows.Forms.ErrorProvider(this.components);
             this.errorDoB = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.gbGender.SuspendLayout();
             this.gbStatus.SuspendLayout();
             this.gbIsAdmin.SuspendLayout();
@@ -282,27 +282,69 @@ namespace QLCF
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // errorHoten
+            // 
+            this.errorHoten.ContainerControl = this;
+            // 
+            // errorAddress
+            // 
+            this.errorAddress.ContainerControl = this;
+            // 
+            // errorSDT
+            // 
+            this.errorSDT.ContainerControl = this;
+            // 
+            // errorGender
+            // 
+            this.errorGender.ContainerControl = this;
+            // 
+            // errorStatus
+            // 
+            this.errorStatus.ContainerControl = this;
+            // 
+            // errorIsAdmin
+            // 
+            this.errorIsAdmin.ContainerControl = this;
+            // 
+            // errorDoB
+            // 
+            this.errorDoB.ContainerControl = this;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
+            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEdit.Location = new System.Drawing.Point(163, 164);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(51, 40);
+            this.btnEdit.TabIndex = 53;
+            this.btnEdit.Text = "Lưu";
+            this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Visible = false;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
             // btnCancel
             // 
-            //this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
-            //this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            //this.btnCancel.Location = new System.Drawing.Point(290, 164);
-            //this.btnCancel.Name = "btnCancel";
-            //this.btnCancel.Size = new System.Drawing.Size(55, 40);
-            //this.btnCancel.TabIndex = 51;
-            //this.btnCancel.Text = "Hủy";
-            //this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            //this.btnCancel.UseVisualStyleBackColor = true;
-            //this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.Location = new System.Drawing.Point(265, 164);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(55, 40);
+            this.btnCancel.TabIndex = 57;
+            this.btnCancel.Text = "Hủy";
+            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // FormAddEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 216);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAdd);
-            //this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.gbIsAdmin);
@@ -358,7 +400,6 @@ namespace QLCF
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ErrorProvider errorHoten;
         private System.Windows.Forms.ErrorProvider errorAddress;
         private System.Windows.Forms.ErrorProvider errorSDT;
@@ -367,6 +408,6 @@ namespace QLCF
         private System.Windows.Forms.ErrorProvider errorIsAdmin;
         private System.Windows.Forms.ErrorProvider errorDoB;
         private System.Windows.Forms.Button btnEdit;
-        //private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
