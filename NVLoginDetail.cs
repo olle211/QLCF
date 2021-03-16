@@ -21,7 +21,7 @@ namespace QLCF
         {
             lblMaNV.Text = nv.IMaNV.ToString();
             lblTenNV.Text = nv.SHoTen.ToString();
-            lblNgaySinh.Text = nv.DNgaySinh.Value.ToString("yyyy-MM-DD");
+            lblNgaySinh.Text = nv.DNgaySinh.Value.ToString("dd-MM-yyyy");
             lblGT.Text = nv.SGioitinh.ToString();
             lblSDT.Text = nv.ISDT.ToString();
         }

@@ -70,7 +70,7 @@ namespace QLCF
                 if (maHD == item.ISoHD)
                 {
                     lblMaHD.Text = maHD.ToString();
-                    lblNgayLap.Text = item.DNgaylap.Value.ToString("yyyy-MM-dd");
+                    lblNgayLap.Text = item.DNgaylap.Value.ToString("dd-MM-yyyy");
                 }
             }
             listSPOder = SanPhamOderDAO.Instance.listSPOder(maHD);
